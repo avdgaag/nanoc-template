@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+# A few helpful tips about the Rules file:
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+compile %{/assets/(lib|styles)/} do
+  filter :erb
+  filter :concat
+  filter :less if @item[:extension] == 'less'
+  filter :minify
+end
+
+compile %r{^/(google|robots|htaccess|404|500|assets)} do
+  # don't filter or layout
+end
+
+compile '/sitemap/' do
+  filter :erb
+end
+
+compile '*' do
+  filter :erb
+  filter :kramdown if item[:extension] == 'md'
+  filter :typogruby
+  filter :cache_buster
+  layout 'default'
+end
+
+route '/' do
+  '/index.html'
+end
+
+route '/htaccess/' do
+  '/.htaccess'
+end
+
+route %r{^/(assets/.*|sitemap|robots|atom)/$} do
+  item.identifier.chop + '.' + item[:extension]
+end
+
+route '*' do
+  item.identifier.chop + '.html'
+end
+
+layout '*', :erb

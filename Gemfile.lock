@@ -1,0 +1,32 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    builder (2.1.2)
+    cri (1.0.1)
+    jsmin (1.0.1)
+    kramdown (0.10.0)
+    less (1.2.21)
+      mutter (>= 0.4.2)
+      treetop (>= 1.4.2)
+    mutter (0.5.3)
+    nanoc3 (3.1.5)
+      cri (>= 1.0.0)
+    polyglot (0.3.1)
+    rainpress (1.0)
+    rubypants (0.2.0)
+    treetop (1.4.8)
+      polyglot (>= 0.3.1)
+    typogruby (1.0.7)
+      rubypants
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  builder
+  jsmin (~> 1.0)
+  kramdown (~> 0.10)
+  less (~> 1.2)
+  nanoc3 (~> 3.1)
+  rainpress (~> 1.0)
+  typogruby (~> 1.0)
