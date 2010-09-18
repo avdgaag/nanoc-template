@@ -1,3 +1,5 @@
+require 'bundler/setup'
+require 'deadweight'
 require 'xmlrpc/client'
 require 'net/http'
 require 'uri'
@@ -9,6 +11,11 @@ task :ping => ['ping:sitemap', 'ping:pingomatic']
 
 def config
   @config ||= YAML.load_file(File.join(File.dirname(__FILE__), 'config.yaml'))
+end
+
+Deadweight::RakeTask.new do |t|
+  t.stylesheets = Dir['output/**/*.css'].map { |f| f.sub(/^output/, '') }
+  t.pages = Dir['output/**/*.html'].map { |f| f.sub(/^output/, '') }
 end
 
 namespace :ping do

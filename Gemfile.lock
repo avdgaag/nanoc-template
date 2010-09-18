@@ -3,6 +3,9 @@ GEM
   specs:
     builder (2.1.2)
     cri (1.0.1)
+    deadweight (0.1.3)
+      hpricot
+    hpricot (0.8.2)
     jsmin (1.0.1)
     kramdown (0.10.0)
     less (1.2.21)
@@ -24,6 +27,7 @@ PLATFORMS
 
 DEPENDENCIES
   builder
+  deadweight (~> 0.1)
   jsmin (~> 1.0)
   kramdown (~> 0.10)
   less (~> 1.2)
