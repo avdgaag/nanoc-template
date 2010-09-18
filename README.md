@@ -13,6 +13,7 @@ This is a simple template project for kick-starting a web project using the [Nan
 * Comes with sitemap, htaccess, robots and 404 page
 * Comes with vendored jquery and modernizr
 * rake tasks to ping Google and ping-o-matic when your site has changed
+* rake task to find unused CSS rules for your site
 * Lots of demo content to help setting up base stylesheet
 
 Here's what's left on my to-do list:
