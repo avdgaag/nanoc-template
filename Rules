@@ -14,6 +14,7 @@ compile %{/assets/(lib|styles)/} do
   filter :erb
   filter :jslint if @item[:extension] == 'js' && @site.config[:jslint]
   filter :concat
+  filter :cache_buster
   filter :less if @item[:extension] == 'less'
   filter :minify
 end
