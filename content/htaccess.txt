@@ -1,7 +1,14 @@
-# Force the latest IE version, in various cases when it may fall back to IE7
-# mode github.com/rails/rails/commit/123eb25#commitcomment-118920
-# Use ChromeFrame if it's installed for a better experience for the poor IE
-# folk
+# Apache configuration file
+# httpd.apache.org/docs/2.2/mod/quickreference.html
+
+# Techniques in here adapted from all over, including:
+#   Kroc Camen: camendesign.com/.htaccess
+#   perishablepress.com/press/2006/01/10/stupid-htaccess-tricks/
+
+
+# Force the latest IE version, in various cases when it may fall back to IE7 mode
+#  github.com/rails/rails/commit/123eb25#commitcomment-118920
+# Use ChromeFrame if it's installed for a better experience for the poor IE folk
 <IfModule mod_setenvif.c>
   <IfModule mod_headers.c>
     BrowserMatch MSIE ie
@@ -9,18 +16,16 @@
   </IfModule>
 </IfModule>
 
-# Because X-UA-Compatible isn't sent to non-IE (to save header bytes),
-# We need to inform proxies that content changes based on UA
-# Ensure proxy caching, since gzip is accept-encoding dependent.
-# Cache control is set only if mod_headers is enabled, so that's unncessary
-# to declare
 <IfModule mod_headers.c>
+# Because X-UA-Compatible isn't sent to non-IE (to save header bytes),
+#   We need to inform proxies that content changes based on UA
   Header append Vary User-Agent
-  Header append Vary Accept-Encoding
+# Cache control is set only if mod_headers is enabled, so that's unncessary to declare
 </IfModule>
 
-# allow access from all domains for webfonts. Alternatively you could only
-# whitelist your subdomains like "sub.domain.com"
+# allow access from all domains for webfonts
+# alternatively you could only whitelist
+#   your subdomains like "sub.domain.com"
 <FilesMatch "\.(ttf|otf|eot|woff|font.css)$">
   <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
@@ -42,17 +47,18 @@ AddType application/vnd.ms-fontobject eot
 AddType font/truetype                 ttf
 AddType font/opentype                 otf
 AddType font/woff                     woff
+
 AddType text/cache-manifest           manifest
 AddType text/x-component              htc
 
 # gzip compression.
 <IfModule mod_deflate.c>
 
-  # html, txt, css, js, json, xml, htc:
-  AddOutputFilter DEFLATE text/html text/plain text/css text/javascript application/javascript application/json
-  AddOutputFilter DEFLATE text/xml application/xml text/x-component
+# html, txt, css, js, json, xml, htc:
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
 
-  # webfonts and svg:
+# webfonts and svg:
   <FilesMatch "\.(ttf|otf|eot|svg)$" >
     SetOutputFilter DEFLATE
   </FilesMatch>
@@ -63,6 +69,7 @@ AddType text/x-component              htc
 #   <script src="application.js?20100608">
 # additionally, consider that outdated proxies may miscache
 #   www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/
+
 # if you don't use filenames to version, lower the css and js to something like
 #   "access plus 1 week" or so
 
@@ -70,27 +77,28 @@ AddType text/x-component              htc
   Header set Cache-Control "public"
   ExpiresActive on
 
-  # Perhaps better to whitelist expires rules? Perhaps.
+# Perhaps better to whitelist expires rules? Perhaps.
   ExpiresDefault                          "access plus 1 month"
 
-  # cache.manifest needs re-reqeusts in FF 3.6 (thx Remy ~Introducing HTML5)
+# cache.manifest needs re-requests in FF 3.6 (thx Remy ~Introducing HTML5)
   ExpiresByType text/cache-manifest       "access plus 0 seconds"
 
-  # your document html
+# your document html
   ExpiresByType text/html                 "access plus 0 seconds"
 
-  # data
+# data
   ExpiresByType text/xml                  "access plus 0 seconds"
   ExpiresByType application/xml           "access plus 0 seconds"
   ExpiresByType application/json          "access plus 0 seconds"
 
-  # rss feed
+
+# rss feed
   ExpiresByType application/rss+xml       "access plus 1 hour"
 
-  # favicon (cannot be renamed)
+# favicon (cannot be renamed)
   ExpiresByType image/vnd.microsoft.icon  "access plus 1 week"
 
-  # media: images, video, audio
+# media: images, video, audio
   ExpiresByType image/gif                 "access plus 1 month"
   ExpiresByType image/png                 "access plus 1 month"
   ExpiresByType image/jpg                 "access plus 1 month"
@@ -100,14 +108,14 @@ AddType text/x-component              htc
   ExpiresByType video/mp4                 "access plus 1 month"
   ExpiresByType video/webm                "access plus 1 month"
 
-  # webfonts
+# webfonts
   ExpiresByType font/truetype             "access plus 1 month"
   ExpiresByType font/opentype             "access plus 1 month"
   ExpiresByType font/woff                 "access plus 1 month"
   ExpiresByType image/svg+xml             "access plus 1 month"
   ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
 
-  # css and javascript
+# css and javascript
   ExpiresByType text/css                  "access plus 1 month"
   ExpiresByType application/javascript    "access plus 1 month"
   ExpiresByType text/javascript           "access plus 1 month"
