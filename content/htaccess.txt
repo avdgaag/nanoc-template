@@ -143,18 +143,21 @@ FileETag None
 # without -MultiViews, Apache will give a 404 for a rewrite if a folder of the same name does not exist
 #   e.g. /blog/hello : webmasterworld.com/apache/3808792.htm
 Options -MultiViews
-
 # -Indexes will have Apache block users from browsing folders without a default document
-Options -Indexes
+# Options -Indexes
 
 # custom 404 page
 ErrorDocument 404 /404.html
 
 # use utf-8 encoding for anything served text/plain or text/html
 AddDefaultCharset utf-8
-
 # force utf-8 for a number of file formats
 AddCharset utf-8 .html .css .js .xml .json .rss
 
 # We don't need to tell everyone we're apache.
 ServerSignature Off
+
+<% if @site.config[:feed_url] && @site.config[:feedburner_url] %>
+# Redirect /feed to feedburner, which knows the real feed URL
+Redirect 301 <%= @site.config[:feed_url] %> <%= @site.config[:feedburner_url] %>
+<% end %>

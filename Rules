@@ -57,11 +57,13 @@ compile %{/assets/(lib|styles)/} do
   filter :minify
 end
 
-compile %r{^/(google|robots|htaccess|404|500|assets)} do
-  # don't filter or layout
+# Don't filter or layout any google files, robots.txt, error pages or anything
+# else in the assets directory.
+compile %r{^/(google|robots|404|500|assets)} do
 end
 
-compile '/sitemap/' do
+# Sitemap and htaccess do get filtered with erb, but get no layout.
+compile %r{^/(sitemap|htaccess)/$} do
   filter :erb
   filter :clean_sitemap if item.identifier == '/sitemap/'
 end

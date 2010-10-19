@@ -35,6 +35,12 @@ meta_data:
 # http://domain.tld
 base_url: http://domain.tld
 
+# The path on the base URL users should be sent to when accessing the feed.
+# This gets rewritten to point at your feedburner_url option, which will
+# in turn know the location of the real URL.
+feed_url: /feed
+feedburner_url: http://feeds.feedburner.com/MyFeed
+
 # Whether to output a default robots.txt file, which simply disallows the
 # /assets directory for all user agents.
 # If you need anything fancier than this, you're better off just writing a
