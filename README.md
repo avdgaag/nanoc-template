@@ -1,16 +1,17 @@
-# Website Template
+# Nanoc Website Template
 
 ## Description
 
 This is a simple template project for kick-starting a web project using the [Nanoc static site generator by Denis Defreyne][2]. Here are some notable features:
 
-* Google Analytics integration
+* Settings to automatically support Google Analytics, Feedburner and
+  Webmaster tools.
 * Base stylesheet
 * Javascript and CSS concatenation and minification
 * combined screen and print stylesheet for minimal number of HTTP requests
 * Improved typography
 * Caching of static assets
-* Comes with sitemap, htaccess, robots and 404 page
+* Comes with sitemap, htaccess, robots.txt and 404 page
 * Comes with vendored jquery and modernizr
 * rake tasks to ping Google and ping-o-matic when your site has changed
 * rake task to find unused CSS rules for your site
@@ -28,15 +29,6 @@ Here's what's left on my to-do list:
 
   An `img_tag` helper could insert images in the desired size with dimension
   already filled out. Feels bloated, though.
-
-* Sitemap filter
-
-  the default sitemap may very well include too much entries. These should be
-  cleaned up neatly.
-
-* HTML sitemap
-* Syntax highlighting
-* a better solution for vendored assets. Sprockets may be nice…?
 
 Occasionally, I extract code and conventions from real-world projects and pull it back into this template.
 
