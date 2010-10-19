@@ -10,6 +10,14 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+# The preprocess block is used to generate dynamic pages, like archives,
+# tag pages and meta-pages that are simple to generate, like the sitemap
+# or feed.
+#
+# Simply create a new item, add it to the @items stack and you're set.
+# Note: the preprocess block has no item context, so you cannot just call
+# xml_sitemap or atom_feed directly. Instead, embed it in a string and filter
+# that with erb.
 preprocess do
   def create_sitemap
     @items << Nanoc3::Item.new(
@@ -47,6 +55,7 @@ preprocess do
   create_sitemap
 end
 
+# The base javascript and stylesheet files
 compile %{/assets/(lib|styles)/} do
   # Use erb to enable timestamps and author information and such.
   filter :erb
