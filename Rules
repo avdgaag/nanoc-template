@@ -18,6 +18,20 @@ preprocess do
       '/sitemap/'
     )
   end
+
+  def create_webmaster_tools_authentications
+    @site.config[:webmaster_tools].each do |file|
+      next if file[:identifier].nil?
+      content    = file.delete(:content)
+      identifier = file.delete(:identifier)
+      @items << Nanoc3::Item.new(
+        content,
+        file,
+        identifier
+      )
+    end
+  end
+
   def create_default_robots_txt
     if @site.config[:default_robots_txt]
       @items << Nanoc3::Item.new(
@@ -29,6 +43,7 @@ preprocess do
   end
 
   create_default_robots_txt
+  create_webmaster_tools_authentications
   create_sitemap
 end
 

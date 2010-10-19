@@ -41,6 +41,18 @@ base_url: http://domain.tld
 # robots.txt file yourself.
 default_robots_txt: true
 
+# Set up authentication files for various webmaster tools (or something
+# similar). This simply creates a plain text file when generating the site.
+#
+# identifier: identifier of the output file, e.g. '/google12345/'
+# content: content of the file, e.g. 'aoa8202ns001'
+# extension: extension of the output file, e.g. 'html' or 'xml'
+webmaster_tools:
+  -
+    identifier:
+    content:
+    extension:
+
 # This is part of the regular expression used to clean up the generated
 # sitemap. It matches the end of <loc>-element. By default it ignores images,
 # text files, xml files, the 404 error page, google webmaster tools token
