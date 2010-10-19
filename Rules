@@ -10,6 +10,17 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+preprocess do
+  def create_sitemap
+    @items << Nanoc3::Item.new(
+      "<%= xml_sitemap %>",
+      { :extension => 'xml' },
+      '/sitemap/'
+    )
+  end
+  create_sitemap
+end
+
 compile %{/assets/(lib|styles)/} do
   # Use erb to enable timestamps and author information and such.
   filter :erb
