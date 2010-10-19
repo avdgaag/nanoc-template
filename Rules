@@ -11,6 +11,7 @@
 #   because “*” matches zero or more characters.
 
 compile %{/assets/(lib|styles)/} do
+  # Use erb to enable timestamps and author information and such.
   filter :erb
   filter :jslint if @item[:extension] == 'js' && @site.config[:jslint]
   filter :concat

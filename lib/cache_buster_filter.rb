@@ -1,3 +1,15 @@
+# The cache buster filter rewrites references to external files, so that the
+# filenames include a timestamp. This creates a unique filename that will
+# change whenever the file is changed.
+#
+# This allows you to use far-future expires headers to fully benefit from
+# client-side caching.
+#
+# We do not simply append a query string, as this might sometimes trigger
+# proxies to not cache the results.
+#
+# Note: this requires you to use .htaccess rewrites to point the
+# filenames-with-timestamps back into normal filenames.
 class CacheBusterFilter < Nanoc3::Filter
   identifier :cache_buster
 
@@ -49,6 +61,7 @@ private
       # when referring to css files, they might actually be .less files in
       # the sources
       real_path.sub!(/css$/, 'less') unless File.exists?(real_path)
+
       if File.exists?(real_path)
         %Q{#{attribute}="#{path.sub(extension, '-cb' + mtime(real_path) + extension)}"}
       else
