@@ -18,6 +18,17 @@ preprocess do
       '/sitemap/'
     )
   end
+  def create_default_robots_txt
+    if @site.config[:default_robots_txt]
+      @items << Nanoc3::Item.new(
+        "User-agent: *\nDisallow: /assets\n",
+        { :extension => 'txt' },
+        '/robots/'
+      )
+    end
+  end
+
+  create_default_robots_txt
   create_sitemap
 end
 

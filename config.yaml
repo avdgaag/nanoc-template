@@ -35,6 +35,12 @@ meta_data:
 # http://domain.tld
 base_url: http://domain.tld
 
+# Whether to output a default robots.txt file, which simply disallows the
+# /assets directory for all user agents.
+# If you need anything fancier than this, you're better off just writing a
+# robots.txt file yourself.
+default_robots_txt: true
+
 # This is part of the regular expression used to clean up the generated
 # sitemap. It matches the end of <loc>-element. By default it ignores images,
 # text files, xml files, the 404 error page, google webmaster tools token
