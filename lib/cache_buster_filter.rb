@@ -17,7 +17,6 @@ class CacheBusterFilter < Nanoc3::Filter
   REGEX_HTML = /(href|src)="([^"]+(\.(?:png|gif|js|jpe?g|css)))"/
 
   def run(content, args = {})
-    return content unless @site.config[:cache_busting]
     stylesheet? ? bust_stylesheet(content) : bust_page(content)
   end
 

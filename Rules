@@ -32,7 +32,7 @@ compile '*' do
   filter :erb
   filter :kramdown if item[:extension] == 'md'
   filter :typogruby
-  filter :cache_buster
+  filter :cache_buster if @site.config[:cache_busting]
   layout 'default'
 end
 
