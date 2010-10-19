@@ -52,6 +52,9 @@ deploy:
   default:
     dst: "host:path"
     options: ['-glpPrtvz', '--delete']
+  staging:
+    dst: "host:path"
+    options: ['-glpPrtvz', '--delete']
 
 # A list of index filenames, i.e. names of files that will be served by a web
 # server when a directory is requested. Usually, index files are named
