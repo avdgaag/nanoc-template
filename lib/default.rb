@@ -1,5 +1,12 @@
 require "bundler/setup"
 include Nanoc3::Helpers::XMLSitemap
+# include Nanoc3::Helpers::Rendering
+# include Nanoc3::Helpers::Blogging
+# include Nanoc3::Helpers::LinkTo
+# include Nanoc3::Helpers::Filtering
+# include Nanoc3::Helpers::Tagging
+# include Nanoc3::Helpers::Capturing
+# include Nanoc3::Helpers::Text
 
 # Output a meta-tag for use in your site header. The key you supply is looked
 # up in the configuration under 'meta_data'. You can override it on a per-item
