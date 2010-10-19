@@ -35,6 +35,12 @@ meta_data:
 # http://domain.tld
 base_url: http://domain.tld
 
+# This is part of the regular expression used to clean up the generated
+# sitemap. It matches the end of <loc>-element. By default it ignores images,
+# text files, xml files, the 404 error page, google webmaster tools token
+# pages and the .htaccess file.
+sitemap_ignore_filter: 'txt|css|png|jpg|xml|js|404\.html|google[a-z0-9]+\.html|\.htaccess'
+
 # Set wheter to apply cache-busting filename rewrites or note. Setting this to
 # tru will require you to rewrite incoming URLs to the right filenames. This
 # will work with apache through .htaccess, but not with Nanoc's default

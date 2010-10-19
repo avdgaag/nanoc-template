@@ -37,6 +37,7 @@ end
 
 compile '/sitemap/' do
   filter :erb
+  filter :clean_sitemap if item.identifier == '/sitemap/'
 end
 
 compile '*' do
