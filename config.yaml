@@ -41,11 +41,22 @@ base_url: http://domain.tld
 feed_url: /feed
 feedburner_url: http://feeds.feedburner.com/MyFeed
 
-# Whether to output a default robots.txt file, which simply disallows the
-# /assets directory for all user agents.
-# If you need anything fancier than this, you're better off just writing a
-# robots.txt file yourself.
-default_robots_txt: true
+# Configure the robots.txt file for this site.
+# Setting 'default' to true-ish will use sensible defaults. If you
+# wish to customize it, you can list paths to allow and to disallow.
+# Finally, you could manually set the path to the sitemap file.
+#
+# You can customize the robots file fairly well like this, but you
+# can always manually create a content file with the exact contents
+# you need.
+robots:
+  default: true # disallow assets, allow assets/images and point at sitemap
+  # disallow:
+  #   - '/tag'
+  #   - '/newsletter'
+  # allow:
+  #   - '/tag/foo'
+  # sitemap: '/site-map.txt'
 
 # Set up authentication files for various webmaster tools (or something
 # similar). This simply creates a plain text file when generating the site.

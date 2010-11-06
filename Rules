@@ -40,17 +40,27 @@ preprocess do
     end
   end
 
-  def create_default_robots_txt
-    if @site.config[:default_robots_txt]
+  def create_robots_txt
+    if @site.config[:robots]
+      content = if @site.config[:robots][:default]
+        "User-agent: *\nDisallow: /assets\nAllow: /assets/images\nSitemap: /sitemap.xml"
+      else
+        [
+          'User-Agent: *',
+          @site.config[:robots][:disallow].map { |l| "Disallow: #{l}" },
+          @site.config[:robots][:allow].map { |l| "Allow: #{l}" },
+          "Sitemap: #{@site.config[:robots][:sitemap]}"
+        ].flatten.compact.join("\n")
+      end
       @items << Nanoc3::Item.new(
-        "User-agent: *\nDisallow: /assets\n",
-        { :extension => 'txt' },
+        content,
+        { :extension => 'txt', :is_hidden => true },
         '/robots/'
       )
     end
   end
 
-  create_default_robots_txt
+  create_robots_txt
   create_webmaster_tools_authentications
   create_sitemap
 end
