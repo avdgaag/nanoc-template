@@ -32,6 +32,7 @@ preprocess do
       next if file[:identifier].nil?
       content    = file.delete(:content)
       identifier = file.delete(:identifier)
+      file.merge({ :is_hidden => true })
       @items << Nanoc3::Item.new(
         content,
         file,
