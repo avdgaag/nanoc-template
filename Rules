@@ -98,7 +98,6 @@ end
 # Sitemap and htaccess do get filtered with erb, but get no layout.
 compile %r{^/(sitemap|htaccess)/$} do
   filter :erb
-  filter :clean_sitemap if item.identifier == '/sitemap/'
 end
 
 compile '*' do
