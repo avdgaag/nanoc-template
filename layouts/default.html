@@ -12,7 +12,7 @@
         <%= meta_tag :copyright %>
         <%= meta_tag :author %>
 
-        <link rel="alternate" title="arjanvandergaag.nl Atom feed"  type="application/atom+xml" href="/feed/">
+        <link rel="alternate" title="<%= @site.config[:meta_data][:title] %> Atom feed"  type="application/atom+xml" href="<%= @site.config[:feed_url] %>">
         <link rel="stylesheet" href="/assets/styles.css">
         <link href="/favicon.png" rel="shortcut icon">
 
