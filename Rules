@@ -80,7 +80,7 @@ preprocess do
 end
 
 # The base javascript and stylesheet files
-compile %{/assets/(lib|styles)/} do
+compile %r{/assets/(lib|styles)/} do
   # Use erb to enable timestamps and author information and such.
   filter :erb
   filter :jslint if @item[:extension] == 'js' && @site.config[:jslint]
