@@ -30,9 +30,9 @@ namespace :ping do
   task :pingomatic do
     XMLRPC::Client.new('rpc.pingomatic.com', '/').call(
       'weblogUpdates.extendedPing',
-      'Arjan van der Gaag',
-      'http://arjanvandergaag.nl',
-      'http://arjanvandergaag.nl/atom.xml'
+      config[:meta_data][:title],
+      config[:base_url],
+      config[:base_url] + '/atom.xml'
     )
   end
 end
