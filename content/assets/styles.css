@@ -411,7 +411,12 @@ img {
  * Conditional comments have applied some special classes to the HTML element,
  * such as .ie6, .ie7, .ie8 and .ie9.
  */
-
+.lte7 input[type="checkbox"] {
+ vertical-align: baseline;
+}
+.ie6 input {
+ vertical-align: text-bottom;
+}
 
 /*
  * #004: Vendor code
