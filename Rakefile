@@ -14,8 +14,8 @@ def config
 end
 
 Deadweight::RakeTask.new do |t|
-  t.stylesheets = Dir['output/**/*.css'].map { |f| f.sub(/^output/, '') }
-  t.pages = Dir['output/**/*.html'].map { |f| f.sub(/^output/, '') }
+  t.stylesheets = Dir[File.join(config['output_dir'], '**', '*.css')].map { |f| f.sub(/^#{config['output_dir']}/, '') }
+  t.pages = Dir[File.join(config['output_dir'], '**', '*.html')].map { |f| f.sub(/^#{config['output_dir']}/, '') }
 end
 
 namespace :ping do
@@ -30,9 +30,9 @@ namespace :ping do
   task :pingomatic do
     XMLRPC::Client.new('rpc.pingomatic.com', '/').call(
       'weblogUpdates.extendedPing',
-      config[:meta_data][:title],
-      config[:base_url],
-      config[:base_url] + '/atom.xml'
+      config['meta_data']['title'],
+      config['base_url'],
+      config['base_url'] + '/atom.xml'
     )
   end
 end
