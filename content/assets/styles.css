@@ -96,6 +96,12 @@ blockquote:before, blockquote:after, q:before, q:after {
 blockquote, q {
     quotes: none;
 }
+strong {
+    font-weight: bold;
+}
+em {
+    font-style: italic;
+}
 ins {
     background-color: #ff9;
     color: #000;
