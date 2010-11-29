@@ -13,168 +13,169 @@
  *
  * TABLE OF CONTENTS
  *
- * #001. Screen styles
- *       #001.a Reset
- *       #001.b Page layout
- *       #001.c Headers
- *       #001.d Generic typography
- *       #001.e Lists
- *       #001.f Tables
- *       #001.g Forms
- *       #001.h Images
- *       #001.i Grids
- * #002. Print syles
+ * #001. Reset
+ * #002. Screen styles
+ *       #002.a Reset
+ *       #002.b Page layout
+ *       #002.c Headers
+ *       #002.d Generic typography
+ *       #002.e Lists
+ *       #002.f Tables
+ *       #002.g Forms
+ *       #002.h Images
+ *       #002.i Grids
+ * #003. Print syles
  *       #002.a Page layout
  *       #002.b Typography
  *       #002.c Links
  *       #002.d Images
- * #003. Browser-specific hacks
- * #004. Vendor code
+ * #005. Browser-specific hacks
+ * #006. Vendor code
  */
 
+
 /*
- * #001: Screen styles
+ * #001: Reset
+ *
+ * Mostly by Eric Meyer. See:
+ *
+ * - http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/
+ * - http://html5doctor.com/html-5-reset-stylesheet/
+ * - http://www.aestheticallyloyal.com/public/optimize-legibility/
+ * - http://maxvoltar.com/archive/-webkit-font-smoothing
+ * - http://people.opera.com/patrickl/experiments/keyboard/test
+ * - http://www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/
+ * - http://code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ *
+ * The reset styles do not just counter everything in the default browser
+ * stylesheet, but may also be used to define basic element styling across
+ * media.
+ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, b, u {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
+    margin: 20px 0;
+}
+body {
+    line-height: 20px;
+    color: black;
+    background: white;
+}
+ol, ul {
+    list-style: none;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: "";
+    content: none;
+}
+blockquote, q {
+    quotes: none;
+}
+ins {
+    background-color: #ff9;
+    color: #000;
+    text-decoration: none;
+}
+mark {
+    background-color: #ff9;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+}
+del {
+    text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted #000;
+    cursor: help;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    padding: 0;
+}
+input, select {
+    vertical-align: middle;
+}
+body, select, input, textarea {
+    color:#444;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+}
+html {
+    overflow-y: scroll;
+}
+sub, sup {
+    font-size: smaller;
+    line-height: 0;
+}
+sub {
+    vertical-align: sub;
+}
+sup {
+    vertical-align: super;
+}
+pre {
+    padding: 15px;
+    white-space: pre;       /* CSS2 */
+    white-space: pre-wrap;  /* CSS 2.1 */
+    white-space: pre-line;  /* CSS 3 (and 2.1 as well, actually) */
+    word-wrap: break-word;  /* IE */
+}
+pre, code, kbd, samp {
+    font-family: monospace, sans-serif;
+}
+input[type="radio"] {
+    vertical-align: text-bottom;
+}
+input[type="checkbox"] {
+    vertical-align: bottom;
+}
+label, input[type="button"], input[type="submit"], button {
+    cursor: pointer;
+}
+button {
+    width: auto;
+    overflow: visible;
+}
+img {
+    -ms-interpolation-mode: bicubic;
+}
+
+/*
+ * #002: Screen styles
  */
 @media screen {
 
     /*
-     * #001.a: Reset
-     *
-     * Mostly by Eric Meyer. See:
-     *
-     * - http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/
-     * - http://html5doctor.com/html-5-reset-stylesheet/
-     * - http://www.aestheticallyloyal.com/public/optimize-legibility/
-     * - http://maxvoltar.com/archive/-webkit-font-smoothing
-     * - http://people.opera.com/patrickl/experiments/keyboard/test
-     * - http://www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/
-     * - http://code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
-     */
-    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-    blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
-    font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-    dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
-    tbody, tfoot, thead, tr, th, td {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        font-weight: inherit;
-        font-style: inherit;
-        font-size: 100%;
-        font-family: inherit;
-        vertical-align: baseline;
-    }
-    p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
-        margin: 20px 0;
-    }
-    a:hover, a:active {
-        outline: none;
-    }
-    body {
-        line-height: 1;
-        color: black;
-        background: white;
-    }
-    ol, ul {
-        list-style: none;
-    }
-    table {
-        border-collapse: separate;
-        border-spacing: 0;
-    }
-    caption, th, td {
-        text-align: left;
-        font-weight: normal;
-    }
-    blockquote:before, blockquote:after, q:before, q:after {
-        content: "";
-        content: none;
-    }
-    blockquote, q {
-        quotes: none;
-    }
-    ins {
-        background-color: #ff9;
-        color: #000;
-        text-decoration: none;
-    }
-    mark {
-        background-color: #ff9;
-        color: #000;
-        font-style: italic;
-        font-weight: bold;
-    }
-    del {
-        text-decoration: line-through;
-    }
-    abbr[title], dfn[title] {
-        border-bottom: 1px dotted #000;
-        cursor: help;
-    }
-    hr {
-        display: block;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid #ccc;
-        margin: 20px 0;
-        padding: 0;
-    }
-    input, select {
-        vertical-align: middle;
-    }
-    body, select, input, textarea {
-        color:#444;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: bold;
-        text-rendering: optimizeLegibility;
-    }
-    html {
-        -webkit-font-smoothing: antialiased;
-        overflow-y: scroll;
-    }
-    sub {
-        vertical-align: sub;
-        font-size: smaller;
-    }
-    sup {
-        vertical-align: super;
-        font-size: smaller;
-    }
-    pre {
-        padding: 15px;
-        white-space: pre;       /* CSS2 */
-        white-space: pre-wrap;  /* CSS 2.1 */
-        white-space: pre-line;  /* CSS 3 (and 2.1 as well, actually) */
-        word-wrap: break-word;  /* IE */
-    }
-    pre, code, kbd, samp {
-        font-family: monospace, sans-serif;
-    }
-    input[type="radio"] {
-        vertical-align: text-bottom;
-    }
-    input[type="checkbox"] {
-        vertical-align: bottom;
-        *vertical-align: baseline;
-    }
-    .ie6 input {
-        vertical-align: text-bottom;
-    }
-    label, input[type="button"], input[type="submit"], button {
-        cursor: pointer;
-    }
-    button {
-        width: auto;
-        overflow: visible;
-    }
-    img {
-        -ms-interpolation-mode: bicubic;
-    }
-
-    /*
-     * #001.b: Page layout
+     * #002.b: Page layout
      */
     .autoclear:after {
         visibility: hidden;
@@ -191,27 +192,27 @@
     /* close commented backslash hack */
 
     /*
-     * #001.c: Headers
+     * #002.c: Headers
      */
 
     /*
-     * #001.d: Generic typography
+     * #002.d: Generic typography
      */
 
     /*
-     * #001.e: Lists
+     * #002.e: Lists
      */
 
     /*
-     * #001.f: Tables
+     * #002.f: Tables
      */
 
     /*
-     * #001.g: Forms
+     * #002.g: Forms
      */
 
     /*
-     * #001.h: Images
+     * #002.h: Images
      */
     div.photo.left, img.left {
         float: left;
@@ -237,7 +238,7 @@
     }
 
     /*
-     * #001.i: Grids
+     * #002.i: Grids
      */
     .column {
         float: left;
@@ -343,7 +344,7 @@
 }
 
 /*
- * #002: Print styles
+ * #003: Print styles
  */
 @media print {
     /*
