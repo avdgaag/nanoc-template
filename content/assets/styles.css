@@ -29,6 +29,9 @@
  *       #002.b Typography
  *       #002.c Links
  *       #002.d Images
+ * #004. Mobile devices styles
+ *       #004.a iPhone and other smartphones
+ *       #004.b iPad and similar devices
  * #005. Browser-specific hacks
  * #006. Vendor code
  */
@@ -404,7 +407,29 @@ img {
 }
 
 /*
- * #003: Browser-specific hacks
+ * #004: Mobile devices styles
+ *
+ * These media queries apply to both portrait and landscape. To limit styles to just one
+ * orientation, create a new section and apply the following media query:
+ *
+ *   ... and (orientation: [landscape|portrait])
+ *
+ */
+
+/*
+ * #004.a iPhone and other smartphones
+ */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+}
+
+/*
+ * #004.b iPad and similar devices
+ */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+}
+
+/*
+ * #005: Browser-specific hacks
  *
  * The following rules are meant to fix cross-browser compatibility issues.
  *
@@ -419,7 +444,7 @@ img {
 }
 
 /*
- * #004: Vendor code
+ * #006: Vendor code
  *
  * Insert code from other libraries or plugins below.
  */
