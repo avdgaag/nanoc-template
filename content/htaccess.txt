@@ -161,3 +161,8 @@ ServerSignature Off
 # Redirect /feed to feedburner, which knows the real feed URL
 Redirect 301 <%= @site.config[:feed_url] %> <%= @site.config[:feedburner_url] %>
 <% end %>
+
+<% if @site.config[:redirects] %>
+# Set up URL redirects<% @site.config[:redirects].each do |h| %>
+Redirect 301 <%= h[:from] %> <%= h[:to] %>
+<% end %><% end %>

@@ -81,6 +81,12 @@ cache_busting: false
 # when working on other stuff.
 jslint: true
 
+# Set up URL redirects in the .htacccess file to point old URLs to a new
+# location, thereby keeping your SEO-mojo intact and visitors happy.
+# redirects:
+#   - from:  /path
+#     to:    http://www.new-url.com/path
+
 # Deployment targets using rsync. The default target will remove all that's
 # already there and replace it with the contents of the /output directory.
 deploy:
