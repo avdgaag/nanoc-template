@@ -346,9 +346,6 @@ img {
     /*
      * #002.a: Page layout
      */
-    @page {
-        margin: 1cm;
-    }
     #secondary, #tertiary, #nav, form, #global_navigation {
         display: none;
     }
