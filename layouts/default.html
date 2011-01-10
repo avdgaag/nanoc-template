@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 lte7 lte8 lte9"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 lte7 lte8 lte9"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie ie8 lte8 lte9"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9 lte9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <html lang="<%= @site.config[:meta_data][:lang] %>" class="no-js ie ie6 lte7 lte8 lte9"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="<%= @site.config[:meta_data][:lang] %>" class="no-js ie ie7 lte7 lte8 lte9"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="<%= @site.config[:meta_data][:lang] %>" class="no-js ie ie8 lte8 lte9"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="<%= @site.config[:meta_data][:lang] %>" class="no-js ie ie9 lte9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="<%= @site.config[:meta_data][:lang] %>" class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <title><%= @item[:title] %> &bull; <%= @site.config[:meta_data][:title] %></title>
