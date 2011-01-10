@@ -1,6 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    adsf (1.0.1)
+      rack (>= 1.0.0)
     builder (2.1.2)
     cri (1.0.1)
     deadweight (0.1.3)
@@ -17,6 +19,7 @@ GEM
     nanoc3 (3.2.0a2)
       cri (>= 1.0.0)
     polyglot (0.3.1)
+    rack (1.2.1)
     rainpress (1.0)
     rubypants (0.2.0)
     treetop (1.4.8)
@@ -28,11 +31,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  builder
+  adsf (~> 1.0)
+  builder (~> 2.1)
   deadweight (~> 0.1)
   jsmin (~> 1.0)
   kramdown (~> 0.10)
   less (~> 1.2)
   nanoc (~> 3.1)
+  rack (~> 1.2)
   rainpress (~> 1.0)
   typogruby (~> 1.0)
