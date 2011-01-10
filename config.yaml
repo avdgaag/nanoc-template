@@ -79,7 +79,7 @@ cache_busting: false
 # JSlint checks your javascript syntax, but you can turn it off for a speed boost.
 # Recommended is to leave it on when writing or implementing javascript, and off
 # when working on other stuff.
-jslint: true
+jslint: false
 
 # Deployment targets using rsync. The default target will remove all that's
 # already there and replace it with the contents of the /output directory.
