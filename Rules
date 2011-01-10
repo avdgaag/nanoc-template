@@ -92,7 +92,15 @@ end
 
 # Don't filter or layout any google files, robots.txt, error pages or anything
 # else in the assets directory.
-compile %r{^/(google|robots|404|500|assets)} do
+compile %r{^/(google|robots|assets)} do
+end
+
+compile %r{^/(404)/$} do
+  filter :erb
+  filter :kramdown if item[:extension] == 'md'
+  filter :typogruby
+  filter :cache_buster if @site.config[:cache_busting]
+  layout 'simple'
 end
 
 # Sitemap and htaccess do get filtered with erb, but get no layout.
