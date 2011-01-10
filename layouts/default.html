@@ -33,19 +33,19 @@
 
         <div id="page">
 
-            <div id="header">
+            <div id="header" role="banner">
 
                 <h1><%= @site.config[:meta_data][:title] %></h1>
 
             </div><!-- /header -->
 
-            <div id="content">
+            <div id="content" role="maincontent">
 
                 <%= yield %>
 
             </div><!-- /content -->
 
-            <div id="footer">
+            <div id="footer" role="contentinfo">
 
                 <p class="col"><%= @site.config[:meta_data][:copyright] %></p>
 
