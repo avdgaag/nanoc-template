@@ -62,7 +62,7 @@ preprocess do
         [
           'User-Agent: *',
           @site.config[:robots][:disallow].map { |l| "Disallow: #{l}" },
-          @site.config[:robots][:allow].map { |l| "Allow: #{l}" },
+          (@site.config[:robots][:allow] || []).map { |l| "Allow: #{l}" },
           "Sitemap: #{@site.config[:robots][:sitemap]}"
         ].flatten.compact.join("\n")
       end
