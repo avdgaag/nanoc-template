@@ -13,168 +13,178 @@
  *
  * TABLE OF CONTENTS
  *
- * #001. Screen styles
- *       #001.a Reset
- *       #001.b Page layout
- *       #001.c Headers
- *       #001.d Generic typography
- *       #001.e Lists
- *       #001.f Tables
- *       #001.g Forms
- *       #001.h Images
- *       #001.i Grids
- * #002. Print syles
+ * #001. Reset
+ * #002. Screen styles
+ *       #002.a Reset
+ *       #002.b Page layout
+ *       #002.c Headers
+ *       #002.d Generic typography
+ *       #002.e Lists
+ *       #002.f Tables
+ *       #002.g Forms
+ *       #002.h Images
+ *       #002.i Grids
+ * #003. Print syles
  *       #002.a Page layout
  *       #002.b Typography
  *       #002.c Links
  *       #002.d Images
- * #003. Browser-specific hacks
- * #004. Vendor code
+ * #004. Mobile devices styles
+ *       #004.a iPhone and other smartphones
+ *       #004.b iPad and similar devices
+ * #005. Browser-specific hacks
+ * #006. Vendor code
  */
 
+
 /*
- * #001: Screen styles
+ * #001: Reset
+ *
+ * Mostly by Eric Meyer. See:
+ *
+ * - http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/
+ * - http://html5doctor.com/html-5-reset-stylesheet/
+ * - http://www.aestheticallyloyal.com/public/optimize-legibility/
+ * - http://maxvoltar.com/archive/-webkit-font-smoothing
+ * - http://people.opera.com/patrickl/experiments/keyboard/test
+ * - http://www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/
+ * - http://code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
+ *
+ * The reset styles do not just counter everything in the default browser
+ * stylesheet, but may also be used to define basic element styling across
+ * media.
+ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, b, u {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
+    margin: 20px 0;
+}
+body {
+    line-height: 20px;
+    color: black;
+    background: white;
+}
+ol, ul {
+    list-style: none;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: "";
+    content: none;
+}
+blockquote, q {
+    quotes: none;
+}
+strong {
+    font-weight: bold;
+}
+em {
+    font-style: italic;
+}
+ins {
+    background-color: #ff9;
+    color: #000;
+    text-decoration: none;
+}
+mark {
+    background-color: #ff9;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+}
+del {
+    text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted #000;
+    cursor: help;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    padding: 0;
+}
+input, select {
+    vertical-align: middle;
+}
+body, select, input, textarea {
+    color:#444;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+}
+html {
+    overflow-y: scroll;
+}
+sub, sup {
+    font-size: smaller;
+    line-height: 0;
+}
+sub {
+    vertical-align: sub;
+}
+sup {
+    vertical-align: super;
+}
+pre {
+    padding: 15px;
+    white-space: pre;       /* CSS2 */
+    white-space: pre-wrap;  /* CSS 2.1 */
+    white-space: pre-line;  /* CSS 3 (and 2.1 as well, actually) */
+    word-wrap: break-word;  /* IE */
+}
+pre, code, kbd, samp {
+    font-family: monospace, sans-serif;
+}
+input[type="radio"] {
+    vertical-align: text-bottom;
+}
+input[type="checkbox"] {
+    vertical-align: bottom;
+}
+label, input[type="button"], input[type="submit"], button {
+    cursor: pointer;
+}
+button {
+    width: auto;
+    overflow: visible;
+}
+img {
+    -ms-interpolation-mode: bicubic;
+}
+
+/*
+ * #002: Screen styles
  */
 @media screen {
 
     /*
-     * #001.a: Reset
-     *
-     * Mostly by Eric Meyer. See:
-     *
-     * - http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/
-     * - http://html5doctor.com/html-5-reset-stylesheet/
-     * - http://www.aestheticallyloyal.com/public/optimize-legibility/
-     * - http://maxvoltar.com/archive/-webkit-font-smoothing
-     * - http://people.opera.com/patrickl/experiments/keyboard/test
-     * - http://www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/
-     * - http://code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/
-     */
-    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-    blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
-    font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-    dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
-    tbody, tfoot, thead, tr, th, td {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        font-weight: inherit;
-        font-style: inherit;
-        font-size: 100%;
-        font-family: inherit;
-        vertical-align: baseline;
-    }
-    p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
-        margin: 20px 0;
-    }
-    a:hover, a:active {
-        outline: none;
-    }
-    body {
-        line-height: 1;
-        color: black;
-        background: white;
-    }
-    ol, ul {
-        list-style: none;
-    }
-    table {
-        border-collapse: separate;
-        border-spacing: 0;
-    }
-    caption, th, td {
-        text-align: left;
-        font-weight: normal;
-    }
-    blockquote:before, blockquote:after, q:before, q:after {
-        content: "";
-        content: none;
-    }
-    blockquote, q {
-        quotes: none;
-    }
-    ins {
-        background-color: #ff9;
-        color: #000;
-        text-decoration: none;
-    }
-    mark {
-        background-color: #ff9;
-        color: #000;
-        font-style: italic;
-        font-weight: bold;
-    }
-    del {
-        text-decoration: line-through;
-    }
-    abbr[title], dfn[title] {
-        border-bottom: 1px dotted #000;
-        cursor: help;
-    }
-    hr {
-        display: block;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid #ccc;
-        margin: 20px 0;
-        padding: 0;
-    }
-    input, select {
-        vertical-align: middle;
-    }
-    body, select, input, textarea {
-        color:#444;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: bold;
-        text-rendering: optimizeLegibility;
-    }
-    html {
-        -webkit-font-smoothing: antialiased;
-        overflow-y: scroll;
-    }
-    sub {
-        vertical-align: sub;
-        font-size: smaller;
-    }
-    sup {
-        vertical-align: super;
-        font-size: smaller;
-    }
-    pre {
-        padding: 15px;
-        white-space: pre;       /* CSS2 */
-        white-space: pre-wrap;  /* CSS 2.1 */
-        white-space: pre-line;  /* CSS 3 (and 2.1 as well, actually) */
-        word-wrap: break-word;  /* IE */
-    }
-    pre, code, kbd, samp {
-        font-family: monospace, sans-serif;
-    }
-    input[type="radio"] {
-        vertical-align: text-bottom;
-    }
-    input[type="checkbox"] {
-        vertical-align: bottom;
-        *vertical-align: baseline;
-    }
-    .ie6 input {
-        vertical-align: text-bottom;
-    }
-    label, input[type="button"], input[type="submit"], button {
-        cursor: pointer;
-    }
-    button {
-        width: auto;
-        overflow: visible;
-    }
-    img {
-        -ms-interpolation-mode: bicubic;
-    }
-
-    /*
-     * #001.b: Page layout
+     * #002.b: Page layout
      */
     .autoclear:after {
         visibility: hidden;
@@ -191,35 +201,35 @@
     /* close commented backslash hack */
 
     /*
-     * #001.c: Headers
+     * #002.c: Headers
      */
 
     /*
-     * #001.d: Generic typography
+     * #002.d: Generic typography
      */
 
     /*
-     * #001.e: Lists
+     * #002.e: Lists
      */
 
     /*
-     * #001.f: Tables
+     * #002.f: Tables
      */
 
     /*
-     * #001.g: Forms
+     * #002.g: Forms
      */
 
     /*
-     * #001.h: Images
+     * #002.h: Images
      */
     div.photo.left, img.left {
         float: left;
-        margin: 20px 20px 20px 0;
+        margin: 0 20px 20px 0;
     }
     div.photo.right, img.right {
         float: right;
-        margin: 20px 0 20px 20px;
+        margin: 0 0 20px 20px;
     }
     div.photo.full, img.full {
         clear: both;
@@ -237,122 +247,118 @@
     }
 
     /*
-     * #001.i: Grids
+     * #002.i: Grids
      */
     .column {
         float: left;
         margin: 0 20px 0 0;
     }
-    .column.last {
+    .last {
         margin-right: 0;
     }
-    .column.span1  { width:  40px; }
-    .column.span2  { width: 100px; }
-    .column.span3  { width: 160px; }
-    .column.span4  { width: 220px; }
-    .column.span5  { width: 280px; }
-    .column.span6  { width: 340px; }
-    .column.span7  { width: 400px; }
-    .column.span8  { width: 460px; }
-    .column.span9  { width: 520px; }
-    .column.span10 { width: 580px; }
-    .column.span11 { width: 640px; }
-    .column.span12 { width: 700px; }
-    .column.span13 { width: 760px; }
-    .column.span14 { width: 820px; }
-    .column.span15 { width: 880px; }
-    .column.span16 { width: 940px; margin-right: 0; }
-    .column.append1  { padding-right: 60px; }
-    .column.append2  { padding-right: 120px; }
-    .column.append3  { padding-right: 180px; }
-    .column.append4  { padding-right: 240px; }
-    .column.append5  { padding-right: 300px; }
-    .column.append6  { padding-right: 360px; }
-    .column.append7  { padding-right: 420px; }
-    .column.append8  { padding-right: 480px; }
-    .column.append9  { padding-right: 540px; }
-    .column.append10 { padding-right: 600px; }
-    .column.append11 { padding-right: 660px; }
-    .column.append12 { padding-right: 720px; }
-    .column.append13 { padding-right: 780px; }
-    .column.append14 { padding-right: 840px; }
-    .column.append15 { padding-right: 900px; }
-    .column.append16 { padding-right: 960px; }
-    .column.prepend1  { padding-left: 60px; }
-    .column.prepend2  { padding-left: 120px; }
-    .column.prepend3  { padding-left: 180px; }
-    .column.prepend4  { padding-left: 240px; }
-    .column.prepend5  { padding-left: 300px; }
-    .column.prepend6  { padding-left: 360px; }
-    .column.prepend7  { padding-left: 420px; }
-    .column.prepend8  { padding-left: 480px; }
-    .column.prepend9  { padding-left: 540px; }
-    .column.prepend10 { padding-left: 600px; }
-    .column.prepend11 { padding-left: 660px; }
-    .column.prepend12 { padding-left: 720px; }
-    .column.prepend13 { padding-left: 780px; }
-    .column.prepend14 { padding-left: 840px; }
-    .column.prepend15 { padding-left: 900px; }
-    .column.prepend16 { padding-left: 960px; }
-    .column.pull1, .column.pull2, .column.pull3, .column.pull4, .column.pull5,
-    .column.pull6, .column.pull7, .column.pull8, .column.pull9,
-    .column.pull10, .column.pull11, .column.pull12, .column.pull13,
-    .column.pull14, .column.pull15, .column.pull6 {
+    .span1  { width:  40px; }
+    .span2  { width: 100px; }
+    .span3  { width: 160px; }
+    .span4  { width: 220px; }
+    .span5  { width: 280px; }
+    .span6  { width: 340px; }
+    .span7  { width: 400px; }
+    .span8  { width: 460px; }
+    .span9  { width: 520px; }
+    .span10 { width: 580px; }
+    .span11 { width: 640px; }
+    .span12 { width: 700px; }
+    .span13 { width: 760px; }
+    .span14 { width: 820px; }
+    .span15 { width: 880px; }
+    .span16 { width: 940px; margin-right: 0; }
+    .append1  { padding-right: 60px; }
+    .append2  { padding-right: 120px; }
+    .append3  { padding-right: 180px; }
+    .append4  { padding-right: 240px; }
+    .append5  { padding-right: 300px; }
+    .append6  { padding-right: 360px; }
+    .append7  { padding-right: 420px; }
+    .append8  { padding-right: 480px; }
+    .append9  { padding-right: 540px; }
+    .append10 { padding-right: 600px; }
+    .append11 { padding-right: 660px; }
+    .append12 { padding-right: 720px; }
+    .append13 { padding-right: 780px; }
+    .append14 { padding-right: 840px; }
+    .append15 { padding-right: 900px; }
+    .append16 { padding-right: 960px; }
+    .prepend1  { padding-left: 60px; }
+    .prepend2  { padding-left: 120px; }
+    .prepend3  { padding-left: 180px; }
+    .prepend4  { padding-left: 240px; }
+    .prepend5  { padding-left: 300px; }
+    .prepend6  { padding-left: 360px; }
+    .prepend7  { padding-left: 420px; }
+    .prepend8  { padding-left: 480px; }
+    .prepend9  { padding-left: 540px; }
+    .prepend10 { padding-left: 600px; }
+    .prepend11 { padding-left: 660px; }
+    .prepend12 { padding-left: 720px; }
+    .prepend13 { padding-left: 780px; }
+    .prepend14 { padding-left: 840px; }
+    .prepend15 { padding-left: 900px; }
+    .prepend16 { padding-left: 960px; }
+    .pull1, .pull2, .pull3, .pull4, .pull5, .pull6, .pull7, .pull8, .pull9,
+    .pull10, .pull11, .pull12, .pull13, .pull14, .pull15, .pull6 {
         float: left;
         position: relative;
     }
-    .column.pull1 {  margin-left: -60px; }
-    .column.pull2 {  margin-left: -120px; }
-    .column.pull3 {  margin-left: -180px; }
-    .column.pull4 {  margin-left: -240px; }
-    .column.pull5 {  margin-left: -300px; }
-    .column.pull6 {  margin-left: -360px; }
-    .column.pull7 {  margin-left: -420px; }
-    .column.pull8 {  margin-left: -480px; }
-    .column.pull9 {  margin-left: -540px; }
-    .column.pull10 { margin-left: -600px; }
-    .column.pull11 { margin-left: -660px; }
-    .column.pull12 { margin-left: -720px; }
-    .column.pull13 { margin-left: -780px; }
-    .column.pull14 { margin-left: -840px; }
-    .column.pull15 { margin-left: -900px; }
-    .column.pull16 { margin-left: -960px; }
-    .column.push1, .column.push2, .column.push3, .column.push4, .column.push5,
-    .column.push6, .column.push7, .column.push8, .column.push9,
-    .column.push10, .column.push11, .column.push12, .column.push13,
-    .column.push14, .column.push15, .column.push6 {
+    .pull1 {  margin-left: -60px; }
+    .pull2 {  margin-left: -120px; }
+    .pull3 {  margin-left: -180px; }
+    .pull4 {  margin-left: -240px; }
+    .pull5 {  margin-left: -300px; }
+    .pull6 {  margin-left: -360px; }
+    .pull7 {  margin-left: -420px; }
+    .pull8 {  margin-left: -480px; }
+    .pull9 {  margin-left: -540px; }
+    .pull10 { margin-left: -600px; }
+    .pull11 { margin-left: -660px; }
+    .pull12 { margin-left: -720px; }
+    .pull13 { margin-left: -780px; }
+    .pull14 { margin-left: -840px; }
+    .pull15 { margin-left: -900px; }
+    .pull16 { margin-left: -960px; }
+    .push1, .push2, .push3, .push4, .push5, .push6, .push7, .push8, .push9,
+    .push10, .push11, .push12, .push13, .push14, .push15, .push6 {
         float: right;
         position: relative;
     }
-    .column.push1 {  margin: 0 -60px 0 60px; }
-    .column.push2 {  margin: 0 -120px 0 120px; }
-    .column.push3 {  margin: 0 -180px 0 180px; }
-    .column.push4 {  margin: 0 -240px 0 240px; }
-    .column.push5 {  margin: 0 -300px 0 300px; }
-    .column.push6 {  margin: 0 -360px 0 360px; }
-    .column.push7 {  margin: 0 -420px 0 420px; }
-    .column.push8 {  margin: 0 -480px 0 480px; }
-    .column.push9 {  margin: 0 -540px 0 540px; }
-    .column.push10 { margin: 0 -600px 0 600px; }
-    .column.push11 { margin: 0 -660px 0 660px; }
-    .column.push12 { margin: 0 -720px 0 720px; }
-    .column.push13 { margin: 0 -780px 0 780px; }
-    .column.push14 { margin: 0 -840px 0 840px; }
-    .column.push15 { margin: 0 -900px 0 900px; }
-    .column.push16 { margin: 0 -960px 0 960px; }
+    .push1 {  margin: 0 -60px 0 60px; }
+    .push2 {  margin: 0 -120px 0 120px; }
+    .push3 {  margin: 0 -180px 0 180px; }
+    .push4 {  margin: 0 -240px 0 240px; }
+    .push5 {  margin: 0 -300px 0 300px; }
+    .push6 {  margin: 0 -360px 0 360px; }
+    .push7 {  margin: 0 -420px 0 420px; }
+    .push8 {  margin: 0 -480px 0 480px; }
+    .push9 {  margin: 0 -540px 0 540px; }
+    .push10 { margin: 0 -600px 0 600px; }
+    .push11 { margin: 0 -660px 0 660px; }
+    .push12 { margin: 0 -720px 0 720px; }
+    .push13 { margin: 0 -780px 0 780px; }
+    .push14 { margin: 0 -840px 0 840px; }
+    .push15 { margin: 0 -900px 0 900px; }
+    .push16 { margin: 0 -960px 0 960px; }
 }
 
 /*
- * #002: Print styles
+ * #003: Print styles
  */
 @media print {
     /*
      * #002.a: Page layout
      */
-    @page {
-        margin: 1cm;
-    }
-    #secondary, #tertiary, #nav, form, #global_navigation {
+    #nav,
+    form,
+    #global_navigation,
+    #sidebar {
         display: none;
     }
 
@@ -407,17 +413,44 @@
 }
 
 /*
- * #003: Browser-specific hacks
+ * #004: Mobile devices styles
+ *
+ * These media queries apply to both portrait and landscape. To limit styles to just one
+ * orientation, create a new section and apply the following media query:
+ *
+ *   ... and (orientation: [landscape|portrait])
+ *
+ */
+
+/*
+ * #004.a iPhone and other smartphones
+ */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+}
+
+/*
+ * #004.b iPad and similar devices
+ */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+}
+
+/*
+ * #005: Browser-specific hacks
  *
  * The following rules are meant to fix cross-browser compatibility issues.
  *
  * Conditional comments have applied some special classes to the HTML element,
  * such as .ie6, .ie7, .ie8 and .ie9.
  */
-
+.lte7 input[type="checkbox"] {
+ vertical-align: baseline;
+}
+.ie6 input {
+ vertical-align: text-bottom;
+}
 
 /*
- * #004: Vendor code
+ * #006: Vendor code
  *
  * Insert code from other libraries or plugins below.
  */
