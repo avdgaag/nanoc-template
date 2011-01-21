@@ -64,6 +64,7 @@ AddType text/x-component              htc
   </FilesMatch>
 </IfModule>
 
+<% if @site.config[:cache_busting] %>
 # these are pretty far-future expires headers
 # they assume you control versioning with cachebusting query params like
 #   <script src="application.js?20100608">
@@ -125,6 +126,7 @@ AddType text/x-component              htc
 # static content.
 #   developer.yahoo.com/performance/rules.html#etags
 FileETag None
+<% end %>
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -136,8 +138,10 @@ FileETag None
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
+  <% if @site.config[:cache_busting] %>
   # Remove cache-buster suffixes from asset filenames
   RewriteRule ^(.+)-cb\d+\.(js|png|jpg|gif|css)$ $1.$2
+  <% end %>
 </IfModule>
 
 # without -MultiViews, Apache will give a 404 for a rewrite if a folder of the same name does not exist
