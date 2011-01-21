@@ -99,8 +99,8 @@ compile %r{^/(404)/$} do
   filter :erb
   filter :kramdown if item[:extension] == 'md'
   filter :typogruby
-  filter :cache_buster if @site.config[:cache_busting]
   layout 'simple'
+  filter :cache_buster if @site.config[:cache_busting]
 end
 
 # Sitemap and htaccess do get filtered with erb, but get no layout.
@@ -112,8 +112,8 @@ compile '*' do
   filter :erb
   filter :kramdown if item[:extension] == 'md'
   filter :typogruby
-  filter :cache_buster if @site.config[:cache_busting]
   layout 'default'
+  filter :cache_buster if @site.config[:cache_busting]
 end
 
 route '/' do
