@@ -85,7 +85,7 @@ compile %r{/assets/(lib|styles)/} do
   filter :erb
   filter :jslint if @item[:extension] == 'js' && @site.config[:jslint]
   filter :concat
-  filter :cache_buster if @site.config[:cache_busting]
+  filter :cache_buster
   filter :less if @item[:extension] == 'less'
   filter :minify
 end
@@ -100,7 +100,7 @@ compile %r{^/(404)/$} do
   filter :kramdown if item[:extension] == 'md'
   filter :typogruby
   layout 'simple'
-  filter :cache_buster if @site.config[:cache_busting]
+  filter :cache_buster
 end
 
 # Sitemap and htaccess do get filtered with erb, but get no layout.
@@ -113,7 +113,7 @@ compile '*' do
   filter :kramdown if item[:extension] == 'md'
   filter :typogruby
   layout 'default'
-  filter :cache_buster if @site.config[:cache_busting]
+  filter :cache_buster
 end
 
 route '/' do
@@ -125,7 +125,11 @@ route '/htaccess/' do
 end
 
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
-  item.identifier.chop + '.' + item[:extension]
+  if CacheBusterFilter::EXTENSIONS.include?(item[:extension])
+    item.identifier.chop + CacheBusterFilter.hash(item[:filename]) + '.' + item[:extension]
+  else
+    item.identifier.chop + '.' + item[:extension]
+  end
 end
 
 route '*' do

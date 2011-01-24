@@ -73,12 +73,6 @@ webmaster_tools:
     content:
     extension:
 
-# Set wheter to apply cache-busting filename rewrites or note. Setting this to
-# tru will require you to rewrite incoming URLs to the right filenames. This
-# will work with apache through .htaccess, but not with Nanoc's default
-# view command (the server it spawns does not use .htaccess files)
-cache_busting: false
-
 # JSlint checks your javascript syntax, but you can turn it off for a speed boost.
 # Recommended is to leave it on when writing or implementing javascript, and off
 # when working on other stuff.
