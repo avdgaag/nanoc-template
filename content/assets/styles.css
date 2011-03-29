@@ -25,10 +25,9 @@
  *       #002.h Images
  *       #002.i Grids
  * #003. Print syles
- *       #002.a Page layout
- *       #002.b Typography
- *       #002.c Links
- *       #002.d Images
+ *       #002.a Generic Styles
+ *       #002.b Page Layout
+ *       #002.c Typography
  * #004. Mobile devices styles
  *       #004.a iPhone and other smartphones
  *       #004.b iPad and similar devices
@@ -54,27 +53,32 @@
  * stylesheet, but may also be used to define basic element styling across
  * media.
  */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
-font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
-tbody, tfoot, thead, tr, th, td, b, u {
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    outline: 0;
-    font-weight: inherit;
-    font-style: inherit;
     font-size: 100%;
-    font-family: inherit;
+    font: inherit;
     vertical-align: baseline;
-    text-decoration: none;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
 }
 p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
     margin: 20px 0;
 }
 body {
-    line-height: 20px;
+    font: 13px/1.231 sans-serif;
+    *font-size:small;
     color: black;
     background: white;
 }
@@ -128,6 +132,9 @@ hr {
     margin: 20px 0;
     padding: 0;
 }
+select, input, textarea, button {
+    font:99% sans-serif;
+}
 input, select {
     vertical-align: middle;
 }
@@ -167,14 +174,29 @@ input[type="radio"] {
 input[type="checkbox"] {
     vertical-align: bottom;
 }
+.ie7 input[type="checkbox"] {
+    vertical-align: baseline;
+}
+.ie6 input {
+    vertical-align: text-bottom;
+}
 label, input[type="button"], input[type="submit"], button {
     cursor: pointer;
 }
+textarea {
+    overflow: auto;
+}
+.ie6 legend, .ie7 legend {
+    margin-left: -7px;
+} 
 button {
     width: auto;
     overflow: visible;
 }
-img {
+button, input, select, textarea {
+    margin: 0;
+}
+.ie7 img {
     -ms-interpolation-mode: bicubic;
 }
 
@@ -186,19 +208,18 @@ img {
     /*
      * #002.b: Page layout
      */
-    .autoclear:after {
-        visibility: hidden;
+    .clearfix:before, .clearfix:after {
+        content: "\0020";
         display: block;
-        font-size: 0;
-        content: " ";
-        clear: both;
         height: 0;
+        overflow: hidden;
     }
-    .autoclear { display: inline-block; }
-    /* start commented backslash hack \*/
-    * html .autoclear { height: 1%; }
-    .autoclear { display: block; }
-    /* close commented backslash hack */
+    .clearfix:after {
+        clear: both;
+    }
+    .clearfix {
+        zoom: 1;
+    }
 
     /*
      * #002.c: Headers
@@ -353,7 +374,42 @@ img {
  */
 @media print {
     /*
-     * #002.a: Page layout
+     * #002.a: Generic styles
+     */
+    * {
+        background: transparent !important;
+        color: black !important;
+        text-shadow: none !important;
+        filter:none !important;
+        -ms-filter: none !important;
+    }
+    a, a:visited {
+        color: #444 !important;
+        text-decoration: underline;
+    }
+    pre, blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+    thead {
+        display: table-header-group;
+    }
+    tr, img {
+        page-break-inside: avoid;
+    }
+    @page {
+        margin: 0.5cm;
+    }
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2, h3 {
+        page-break-after: avoid;
+    }
+
+    /*
+     * #002.b: Page layout
      */
     #nav,
     form,
@@ -363,7 +419,7 @@ img {
     }
 
     /*
-     * #002.b: Typography
+     * #002.c: Typography
      */
     body {
         font: 12pt/16pt Cambria, Georgia, Times, Times New Roman, serif;
@@ -372,66 +428,35 @@ img {
     p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
         margin: 16pt 0;
     }
-    pre, blockquote, img {
-        page-break-inside: avoid;
-    }
-    p, h2, h3, h4, h5, h6 {
-        orphans: 3;
-        widows: 3;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        page-break-after: avoid;
-    }
-
-    /*
-     * #002.c: Links
-     */
-    a:link, a:visited {
-        color: #333;
-        text-decoration: none;
-    }
-    #content a:link, #content a:visited {
-        border-bottom: 1px dotted #333;
-    }
-
-    /*
-     * #002.d: Images
-     */
-    img.left {
-        float: left;
-        margin: 16pt;
-    }
-    img.right {
-        float: right;
-        margin: 16pt;
-    }
-    img.full {
-        margin: 16pt auto;
-        text-align: center;
-        display: block;
-    }
 }
 
 /*
  * #004: Mobile devices styles
  *
- * These media queries apply to both portrait and landscape. To limit styles to just one
- * orientation, create a new section and apply the following media query:
- *
- *   ... and (orientation: [landscape|portrait])
- *
+ * These follow after primary styles so they will successfully override.
  */
 
 /*
- * #004.a iPhone and other smartphones
+ * #004.a Portrait mode
  */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media all and (orientation:portrait) {
 }
 
 /*
  * #004.b iPad and similar devices
  */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media all and (orientation:landscape) {
+}
+
+/*
+ * #004.c Generic Grade-A mobile browsers
+ * (Opera Mobile, Mobile Safari, Android Chrome)
+ */
+@media screen and (max-device-width: 480px) {
+    html {
+        -webkit-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+    }
 }
 
 /*
@@ -442,15 +467,11 @@ img {
  * Conditional comments have applied some special classes to the HTML element,
  * such as .ie6, .ie7, .ie8 and .ie9.
  */
-.lte7 input[type="checkbox"] {
- vertical-align: baseline;
-}
-.ie6 input {
- vertical-align: text-bottom;
-}
+
 
 /*
  * #006: Vendor code
  *
  * Insert code from other libraries or plugins below.
  */
+
