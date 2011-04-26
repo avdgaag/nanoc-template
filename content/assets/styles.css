@@ -77,8 +77,9 @@ p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
     margin: 20px 0;
 }
 body {
-    font: 13px/1.231 sans-serif;
-    *font-size:small;
+    font: 13px/1.22 sans-serif;
+    *font-size: small;
+    *font: x-small;
     color: black;
     background: white;
 }
@@ -86,6 +87,8 @@ ol, ul {
     list-style: none;
 }
 table {
+    font-size: inherit;
+    font: 100%;
     border-collapse: separate;
     border-spacing: 0;
 }
