@@ -53,6 +53,11 @@ compile %r{^/(sitemap|htaccess)/$} do
   filter :erb
 end
 
+compile '/sitemap/', :rep => 'gzip' do
+  filter :erb
+  filter :shellcmd, :cmd => 'gzip'
+end
+
 compile '*' do
   filter :erb
   filter :kramdown if item[:extension] == 'md'
@@ -67,6 +72,10 @@ end
 
 route '/htaccess/' do
   '/.htaccess'
+end
+
+route '/sitemap/', :rep => 'gzip' do
+  '/sitemap.xml.gz'
 end
 
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
