@@ -16,6 +16,8 @@
 # 
 # @todo extract hidden file types into configuration file?
 def create_sitemap
+  return unless @site.config[:output_generated_assets]
+  
   @items.each do |item|
     if %w{png gif jpg jpeg css xml js txt}.include?(item[:extension]) ||
        item.identifier =~ /404|500|htaccess/
@@ -38,6 +40,8 @@ end
 # 
 # See config.yaml for more documentation on the input format.
 def create_webmaster_tools_authentications
+  return unless @site.config[:output_generated_assets]
+  
   @site.config[:webmaster_tools].each do |file|
     next if file[:identifier].nil?
     content    = file.delete(:content)
@@ -61,6 +65,8 @@ end
 # configuration, specifying Allow and Disallow directives. See the config.yaml
 # file for more information on the expected input format.
 def create_robots_txt
+  return unless @site.config[:output_generated_assets]
+  
   if @site.config[:robots]
     content = if @site.config[:robots][:default]
       <<-EOS

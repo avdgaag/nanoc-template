@@ -73,6 +73,13 @@ webmaster_tools:
     content:
     extension:
 
+# Should Nanoc generate some standard asset files for you, or skip them
+# completely?
+# 
+# This currently controls the generation of robots.txt, sitemap.xml, 
+# sitemap.xml.gz and webmaster tools authentication files.
+output_generated_assets: true
+
 # JSlint checks your javascript syntax, but you can turn it off for a speed boost.
 # Recommended is to leave it on when writing or implementing javascript, and off
 # when working on other stuff.
