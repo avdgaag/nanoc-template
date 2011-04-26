@@ -244,24 +244,24 @@ button, input, select, textarea {
     /*
      * #002.h: Images
      */
-    div.photo.left, img.left {
+    div.photo.left, img.left, figure.left {
         float: left;
         margin: 0 20px 20px 0;
     }
-    div.photo.right, img.right {
+    div.photo.right, img.right, figure.right {
         float: right;
         margin: 0 0 20px 20px;
     }
-    div.photo.full, img.full {
+    div.photo.full, img.full, figure.full {
         clear: both;
         display: block;
         text-align: center;
         margin: 20px auto;
     }
-    div.photo.bordered, img.bordered {
+    div.photo.bordered img, img.bordered, figure.bordered img {
         border: 1px solid #111;
     }
-    div.photo p {
+    div.photo p, figcaption {
         margin: 0;
         font-size: 11px;
         color: #999;
