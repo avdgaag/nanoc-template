@@ -63,7 +63,12 @@ end
 def create_robots_txt
   if @site.config[:robots]
     content = if @site.config[:robots][:default]
-      "User-agent: *\nDisallow: /assets\nAllow: /assets/images\nSitemap: /sitemap.xml"
+      <<-EOS
+User-agent: *
+Disallow: /assets
+Allow: /assets/images
+Sitemap: #{@site.config[:base_url]}/sitemap.xml
+      EOS
     else
       [
         'User-Agent: *',
