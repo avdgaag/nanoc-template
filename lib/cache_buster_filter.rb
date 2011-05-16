@@ -47,10 +47,18 @@ class CacheBusterFilter < Nanoc3::Filter
 private
 
   # See if the current item is a stylesheet.
-  # @todo This might need more or better criteria
+  #
+  # Apart from regular .css-files, this method will consider any file
+  # with an extension that is mapped to 'css' in the filter_extensions
+  # setting in config.yaml to be a CSS file.
+  #
   # @return <Bool>
   def stylesheet?
-    ['css', 'less'].include?(@item[:extension].to_s)
+    @site.config[:filter_extensions].select do |k, v|
+      v == 'css'
+    end.flatten.uniq.map do |k|
+      k.to_s
+    end.include?(@item[:extension].to_s)
   end
 
   # Make a path relative to the site's content dir absolute
