@@ -79,7 +79,7 @@ route '/sitemap/', :rep => 'gzip' do
 end
 
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
-  if CacheBusterFilter::EXTENSIONS.include?(item[:extension])
+  if CacheBusterFilter.should_filter? item
     extension = @site.config[:filter_extensions][item[:extension].to_sym] || item[:extension]
     item.identifier.chop + CacheBusterFilter.hash(item[:filename]) + '.' + extension
   else
