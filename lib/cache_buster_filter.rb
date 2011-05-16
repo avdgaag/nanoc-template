@@ -14,7 +14,7 @@ class CacheBusterFilter < Nanoc3::Filter
   identifier :cache_buster
 
   # List of extensions of files we want to cache-bust
-  EXTENSIONS = %w{gif jpg jpeg png css bmp js}
+  EXTENSIONS = %w{gif jpg jpeg png css bmp js scss sass coffee less}
 
   # Regex for finding all references to files to be cache busted in CSS files
   REGEX_CSS = /url\(('|"|)(([^'")]+)\.(#{EXTENSIONS.join('|')}))\1\)/i
