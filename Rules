@@ -80,7 +80,8 @@ end
 
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
   if CacheBusterFilter::EXTENSIONS.include?(item[:extension])
-    item.identifier.chop + CacheBusterFilter.hash(item[:filename]) + '.' + item[:extension]
+    extension = @site.config[:filter_extensions][item[:extension].to_sym] || item[:extension]
+    item.identifier.chop + CacheBusterFilter.hash(item[:filename]) + '.' + extension
   else
     item.identifier.chop + '.' + item[:extension]
   end

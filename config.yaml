@@ -8,6 +8,20 @@ text_extensions: [ 'css', 'erb', 'haml', 'htm', 'html', 'js', 'less', 'markdown'
 # relative to the site directory.
 output_dir: output
 
+# Special conversion of input file extensions to output file extensions, so
+# we can transform assets with filters, using filter-specific input filenames
+# while using the correct output filenames.
+#
+# e.g. make sure a .less file becomes a .css file, and a .coffee file becomes
+# a .js file.
+#
+# These settings are used in the Rules-file.
+filter_extensions:
+  scss: css
+  sass: css
+  less: css
+  coffee: js
+
 meta_data:
   # Default title, that is added to an item's own title
   title: Untitled website
