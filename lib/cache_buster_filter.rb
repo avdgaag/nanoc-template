@@ -22,6 +22,14 @@ class CacheBusterFilter < Nanoc3::Filter
   # Regex for finding all references to files to be cache busted in HTML files
   REGEX_HTML = /(href|src)="([^"]+(\.(?:#{EXTENSIONS.join('|')})))"/
 
+  # Custom exception that can be raised by #source_path
+  NoSuchSourceFile = Class.new(Exception)
+
+  # Custom exception that can be raised by #source_path when trying to rewrite
+  # the name of a file that will not be cache busted and should hence be
+  # left alone.
+  NoCacheBusting = Class.new(Exception)
+
   def run(content, args = {})
     stylesheet? ? bust_stylesheet(content) : bust_page(content)
   end
@@ -78,34 +86,94 @@ private
   # @return <String> rewritten content
   def bust_stylesheet(content)
     content.gsub(REGEX_CSS) do |m|
-      real_path = content_path(File.dirname(@item.identifier), $2)
-      if File.exists?(real_path)
-        m.sub($2, $3 + CacheBusterFilter.hash(real_path) + '.' + $4)
-      else
+      quote, filename, basename, extension = $1, $2, $3, $4
+      begin
+        real_path = content_path(source_path(filename))
+        m.sub(filename, basename + CacheBusterFilter.hash(real_path) + '.' + extension)
+      rescue NoCacheBusting, NoSuchSourceFile
         m
       end
     end
   end
 
-  # Add cache-busters to HTML pages
-  # @todo improve the check for less-turned-css files. This might be sass or
-  #   scss. We could check this using the identifier...
+  # Add cache-busters to HTML pages.
   #
+  # Since not every file referenced in the output is an actual input item,
+  # we use {@link source_path} to get to the original input item for that
+  # reference.
+  #
+  # If we cannot find an input item for the given reference, we leave the
+  # reference alone. If we do, we add a cache buster to its filename.
+  #
+  # @see #source_path
   # @param <String> content of a page to rewrite
   # @return <String> rewritten content
   def bust_page(content)
     content.gsub(REGEX_HTML) do |m|
       attribute, path, extension = $1, $2, $3
-      real_path = content_path(path)
-      # when referring to css files, they might actually be .less files in
-      # the sources
-      real_path.sub!(/css$/, 'less') unless File.exists?(real_path)
-
-      if File.exists?(real_path)
+      begin
+        real_path = content_path(source_path(path))
         %Q{#{attribute}="#{path.sub(extension, CacheBusterFilter.hash(real_path) + extension)}"}
-      else
+      rescue NoSuchSourceFile, NoCacheBusting
         m
       end
     end
   end
+
+  # Try to find the source path of a referenced file.
+  #
+  # This will use Nanoc's routing rules to try and find an item whose output
+  # path matches the path given, which is a source reference. It returns
+  # the path to the content file if a match is found.
+  #
+  # As an example, when we use the input file "assets/styles.scss" for our
+  # stylesheet, then we refer to that file in our HTML as "assets/styles.css".
+  # Given the output filename, this method will return the input filename.
+  #
+  # @raises NoSuchSourceFile when no match is found
+  # @param <String> path is the reference to an asset file from another source
+  #   file, such as '/assets/styles.css'
+  # @return <String> the path to the content file for the referenced file,
+  #   such as '/assets/styles.scss'
+  def source_path(path)
+    path = absolutize(path)
+
+    matching_item = @items.find do |item|
+      item.path.sub(/-cb[a-zA-Z0-9]{9}(?=\.)/, '') == path
+    end
+
+    # Make sure the reference is left alone if we cannot find a source file
+    # to base the fingerprint on, or if the file for some reason has no
+    # cache busting applied to it (for example, when it is manually overriden
+    # in the Rules file.)
+    raise NoSuchSourceFile, 'no source file found matching ' + path unless matching_item
+    raise NoCacheBusting, 'there is no cache busting applied to ' + matching_item.identifier unless matching_item.path =~ /-cb[a-zA-Z0-9]{9}(?=\.)/
+
+    # Return the path to the source file in question without the starting content
+    # part, since that is added by #content_path
+    matching_item[:content_filename].sub(/^content\//, '')
+  end
+
+  # Get the absolute path to a file, whereby absolute means relative to the root.
+  #
+  # When we are trying to get to a source file via a referenced filename,
+  # that filename may be absolute (relative to the site root) or relative to
+  # the file itself. In the latter case, our file detection would miss it.
+  # We therefore rewrite any reference not starting with a forward slash
+  # to include the full path of the referring item.
+  #
+  # @example Using an absolute input path in 'assets/styles.css'
+  #   absolutize('/assets/logo.png') # => '/assets/logo.png'
+  # @example Using a relative input path in 'assets/styles.css'
+  #   absolutize('logo.png') # => '/assets/logo.png'
+  #
+  # @param <String> path is the path of the file that is referred to in
+  #   an input file, such as a stylesheet or HTML page.
+  # @return <String> path to the same file as the input path but relative
+  #   to the site root.
+  def absolutize(path)
+    return path if path =~ /^\//
+    File.join(File.dirname(item[:content_filename]), path).sub(/^content/, '')
+  end
 end
+
