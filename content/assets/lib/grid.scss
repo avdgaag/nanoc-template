@@ -1,0 +1,30 @@
+$column_width:  40px;
+$column_margin: 20px;
+$column:        $column_width + $column_margin;
+
+@function columns($n) {
+    @return $n * $column - $column_margin;
+}
+
+@mixin column($n) {
+    float: left;
+    margin-right: $column_margin;
+    display: inline;
+    width: columns($n);
+    position: relative
+}
+@mixin last {
+    margin-right: 0;
+}
+@mixin push($n) {
+    margin-left: columns($n) + $column_margin;
+}
+@mixin prepend($n) {
+    padding-left: columns($n) + $column_margin;
+}
+@mixin pull($n) {
+    margin-left: (columns($n) + $column_margin) * -1
+}
+@mixin append($n) {
+    padding-right: coumns($n) + $column_margin;
+}

@@ -1,0 +1,16 @@
+$line:          20px;
+$sans-serif:    sans-serif;
+$serif:         "Georgia, Times, Times New Roman, serif";
+
+@mixin links($color) {
+    color: $color;
+    &:visited {
+        color: desaturate(darken($color, 10%), 10%);
+    }
+    &:hover, &:focus {
+        color: lighten($color, 20%);
+    }
+    &:active {
+        color: lighten($color, 40%);
+    }
+}

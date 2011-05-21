@@ -1,0 +1,38 @@
+@mixin list_plain {
+    margin: $line 0;
+    list-style: none;
+}
+@mixin list_outset($element, $outdent: $column_width, $margin: $column_margin) {
+    li {
+        @extend .autoclear;
+        padding-left: $outdent + $column_margin;
+        #{$element} {
+            margin-left: ($outdent + $column_margin) * -1;
+            float: left;
+            position: relative;
+            margin-right: $column_margin;
+        }
+    }
+}
+@mixin list_horizontal($spacing: $column_margin) {
+    @extend .autoclear;
+    margin-left: $column_margin * -1;
+    position: relative;
+    li {
+        float: left;
+        display: inline;
+        margin-left: $column_margin;
+    }
+}
+@mixin list_single_line($heading_width: $column_width, $margin: $column_margin) {
+    @extend .autoclear;
+    padding-left: $heading_width + $margin;
+    dt {
+        width: $heading_width;
+        float: left;
+        display: inline;
+        margin-left: ($heading_width + $margin) * -1;
+        margin-right: $margin;
+        clear: left;
+    }
+}
