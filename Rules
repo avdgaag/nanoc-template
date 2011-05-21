@@ -29,9 +29,9 @@ compile %r{/assets/(lib|styles)/} do
   # Use erb to enable timestamps and author information and such.
   filter :erb
   filter :concat
-  filter :cache_buster
   filter :coffeescript if item[:extension] == 'coffee'
   filter :sass, :syntax => :scss if item[:extension] == 'scss'
+  filter :cache_buster
   filter :minify
 end
 
