@@ -28,10 +28,8 @@ end
 compile %r{/assets/(lib|styles)/} do
   # Use erb to enable timestamps and author information and such.
   filter :erb
-  filter :jslint if @item[:extension] == 'js' && @site.config[:jslint]
   filter :concat
   filter :cache_buster
-  filter :less if @item[:extension] == 'less'
   filter :minify
 end
 
@@ -79,11 +77,8 @@ route '/sitemap/', :rep => 'gzip' do
 end
 
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
-  if cachebust?(item)
-    item.identifier.chop + fingerprint(item[:filename]) + '.' + item[:extension]
-  else
-    item.identifier.chop + '.' + item[:extension]
-  end
+  fp = cachebust?(item) ? fingerprint(item[:filename]) : ''
+  item.identifier.chop + fp + '.' + item[:extension]
 end
 
 route '*' do
@@ -91,3 +86,4 @@ route '*' do
 end
 
 layout '*', :erb
+

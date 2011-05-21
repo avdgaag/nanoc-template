@@ -9,22 +9,15 @@ GEM
       nokogiri
     jsmin (1.0.1)
     kramdown (0.13.3)
-    less (1.2.21)
-      mutter (>= 0.4.2)
-      treetop (>= 1.4.2)
-    mutter (0.5.3)
     nanoc (3.1.7)
       nanoc3 (>= 3.1.7)
     nanoc-cachebuster (0.0.1)
     nanoc3 (3.1.7)
       cri (>= 1.0.0)
     nokogiri (1.4.4)
-    polyglot (0.3.1)
     rack (1.2.2)
     rainpress (1.0)
     rubypants (0.2.0)
-    treetop (1.4.9)
-      polyglot (>= 0.3.1)
     typogruby (1.0.12)
       rubypants
 
@@ -37,7 +30,6 @@ DEPENDENCIES
   deadweight (~> 0.1)
   jsmin (~> 1.0)
   kramdown (~> 0.10)
-  less (~> 1.2)
   nanoc (~> 3.1)
   nanoc-cachebuster
   rack (~> 1.2)
