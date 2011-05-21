@@ -4,11 +4,18 @@ GEM
     adsf (1.0.1)
       rack (>= 1.0.0)
     builder (2.1.2)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.1.1)
     cri (1.0.1)
     deadweight (0.2.1)
       nokogiri
+    execjs (1.0.0)
+      multi_json (~> 1.0)
     jsmin (1.0.1)
     kramdown (0.13.3)
+    multi_json (1.0.2)
     nanoc (3.1.7)
       nanoc3 (>= 3.1.7)
     nanoc-cachebuster (0.0.1)
@@ -27,6 +34,7 @@ PLATFORMS
 DEPENDENCIES
   adsf (~> 1.0)
   builder (~> 2.1)
+  coffee-script
   deadweight (~> 0.1)
   jsmin (~> 1.0)
   kramdown (~> 0.10)
