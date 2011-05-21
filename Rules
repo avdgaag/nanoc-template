@@ -29,8 +29,9 @@ compile %r{/assets/(lib|styles)/} do
   # Use erb to enable timestamps and author information and such.
   filter :erb
   filter :concat
-  filter :cache_buster
   filter :coffeescript if item[:extension] == 'coffee'
+  filter :sass, :syntax => :scss if item[:extension] == 'scss'
+  filter :cache_buster
   filter :minify
 end
 
@@ -65,6 +66,11 @@ compile '*' do
   filter :cache_buster
 end
 
+# Don't inlcude any library files, as they should be included in the
+# manifest files (lib.js, styles.css)
+route '/assets/lib/*/' do
+end
+
 route '/' do
   '/index.html'
 end
@@ -80,6 +86,7 @@ end
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
   ext = item[:extension]
   ext = 'js' if ext == 'coffee'
+  ext = 'css' if ext == 'scss'
 
   fp = cachebust?(item) ? fingerprint(item[:filename]) : ''
   item.identifier.chop + fp + '.' + ext

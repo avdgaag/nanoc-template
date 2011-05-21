@@ -35,6 +35,7 @@
  * #006. Vendor code
  */
 
+@import 'lib/grid', 'lib/type', 'lib/mixins';
 
 /*
  * #001: Reset
@@ -53,15 +54,12 @@
  * stylesheet, but may also be used to define basic element styling across
  * media.
  */
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small,
+strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label,
+legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, figcaption, figure, footer, header, hgroup, menu, nav,
+section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -69,12 +67,12 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu,
+nav, section {
   display: block;
 }
 p, table, fieldset, ol, ul, dl, pre, h1, h2, h3, h4, h5, h6, blockquote {
-    margin: 20px 0;
+    margin: $line 0;
 }
 body {
     font: 13px/1.22 sans-serif;
@@ -132,7 +130,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
-    margin: 20px 0;
+    margin: $line 0;
     padding: 0;
 }
 select, input, textarea, button {
@@ -142,7 +140,8 @@ input, select {
     vertical-align: middle;
 }
 body, select, input, textarea {
-    color:#444;
+    color: #444;
+    line-height: $line;
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
@@ -211,30 +210,92 @@ button, input, select, textarea {
     /*
      * #002.b: Page layout
      */
-    .clearfix:before, .clearfix:after {
-        content: "\0020";
-        display: block;
-        height: 0;
-        overflow: hidden;
+    #page {
+        width: columns(16);
+        margin: 0 auto;
+        padding: 0 ($column_margin / 2);
     }
-    .clearfix:after {
-        clear: both;
+    nav {
+        ul {
+            @include list_plain;
+            @include list_horizontal;
+        }
     }
-    .clearfix {
+    .autoclear {
+        &:before, &:after {
+            content: "\0020";
+            display: block;
+            height: 0;
+            overflow: hidden;
+        }
+        &:after {
+            clear: both;
+        }
         zoom: 1;
     }
 
     /*
      * #002.c: Headers
      */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    h3 {
+        font-size: 16px;
+    }
+    h4 {
+        font-size: 14px;
+    }
+    h5 {
+        font-size: 12px;
+    }
+    h6 {
+        font-size: 11px;
+    }
 
     /*
      * #002.d: Generic typography
      */
+    a {
+        @include links(#009);
+    }
+    p.leader {
+        font-size: 16px;
+    }
+    blockquote {
+        margin: $line $column_margin;
+        p {
+            margin: 0;
+        }
+    }
+    small {
+        font-size: 11px;
+        color: #999;
+    }
+    b, strong {
+        font-weight: bold;
+    }
+    em, i {
+        font-style: italic;
+    }
 
     /*
      * #002.e: Lists
      */
+    ul {
+        list-style: disc;
+        margin-left: $column_margin;
+    }
+    ol {
+        list-style: decimal-leading-zero;
+        margin-left: $column_margin * 1.25;
+    }
 
     /*
      * #002.f: Tables
@@ -249,127 +310,25 @@ button, input, select, textarea {
      */
     div.photo.left, img.left, figure.left {
         float: left;
-        margin: 0 20px 20px 0;
+        margin: 0 $column_margin $line 0;
     }
     div.photo.right, img.right, figure.right {
         float: right;
-        margin: 0 0 20px 20px;
+        margin: 0 0 $line $column_margin;
     }
     div.photo.full, img.full, figure.full {
         clear: both;
         display: block;
         text-align: center;
-        margin: 20px auto;
+        margin: $line auto;
     }
     div.photo.bordered img, img.bordered, figure.bordered img {
         border: 1px solid #111;
     }
     div.photo p, figcaption {
+        @extend small;
         margin: 0;
-        font-size: 11px;
-        color: #999;
     }
-
-    /*
-     * #002.i: Grids
-     */
-    .column {
-        float: left;
-        margin: 0 20px 0 0;
-    }
-    .last {
-        margin-right: 0;
-    }
-    .span1  { width:  40px; }
-    .span2  { width: 100px; }
-    .span3  { width: 160px; }
-    .span4  { width: 220px; }
-    .span5  { width: 280px; }
-    .span6  { width: 340px; }
-    .span7  { width: 400px; }
-    .span8  { width: 460px; }
-    .span9  { width: 520px; }
-    .span10 { width: 580px; }
-    .span11 { width: 640px; }
-    .span12 { width: 700px; }
-    .span13 { width: 760px; }
-    .span14 { width: 820px; }
-    .span15 { width: 880px; }
-    .span16 { width: 940px; margin-right: 0; }
-    .append1  { padding-right: 60px; }
-    .append2  { padding-right: 120px; }
-    .append3  { padding-right: 180px; }
-    .append4  { padding-right: 240px; }
-    .append5  { padding-right: 300px; }
-    .append6  { padding-right: 360px; }
-    .append7  { padding-right: 420px; }
-    .append8  { padding-right: 480px; }
-    .append9  { padding-right: 540px; }
-    .append10 { padding-right: 600px; }
-    .append11 { padding-right: 660px; }
-    .append12 { padding-right: 720px; }
-    .append13 { padding-right: 780px; }
-    .append14 { padding-right: 840px; }
-    .append15 { padding-right: 900px; }
-    .append16 { padding-right: 960px; }
-    .prepend1  { padding-left: 60px; }
-    .prepend2  { padding-left: 120px; }
-    .prepend3  { padding-left: 180px; }
-    .prepend4  { padding-left: 240px; }
-    .prepend5  { padding-left: 300px; }
-    .prepend6  { padding-left: 360px; }
-    .prepend7  { padding-left: 420px; }
-    .prepend8  { padding-left: 480px; }
-    .prepend9  { padding-left: 540px; }
-    .prepend10 { padding-left: 600px; }
-    .prepend11 { padding-left: 660px; }
-    .prepend12 { padding-left: 720px; }
-    .prepend13 { padding-left: 780px; }
-    .prepend14 { padding-left: 840px; }
-    .prepend15 { padding-left: 900px; }
-    .prepend16 { padding-left: 960px; }
-    .pull1, .pull2, .pull3, .pull4, .pull5, .pull6, .pull7, .pull8, .pull9,
-    .pull10, .pull11, .pull12, .pull13, .pull14, .pull15, .pull6 {
-        float: left;
-        position: relative;
-    }
-    .pull1 {  margin-left: -60px; }
-    .pull2 {  margin-left: -120px; }
-    .pull3 {  margin-left: -180px; }
-    .pull4 {  margin-left: -240px; }
-    .pull5 {  margin-left: -300px; }
-    .pull6 {  margin-left: -360px; }
-    .pull7 {  margin-left: -420px; }
-    .pull8 {  margin-left: -480px; }
-    .pull9 {  margin-left: -540px; }
-    .pull10 { margin-left: -600px; }
-    .pull11 { margin-left: -660px; }
-    .pull12 { margin-left: -720px; }
-    .pull13 { margin-left: -780px; }
-    .pull14 { margin-left: -840px; }
-    .pull15 { margin-left: -900px; }
-    .pull16 { margin-left: -960px; }
-    .push1, .push2, .push3, .push4, .push5, .push6, .push7, .push8, .push9,
-    .push10, .push11, .push12, .push13, .push14, .push15, .push6 {
-        float: right;
-        position: relative;
-    }
-    .push1 {  margin: 0 -60px 0 60px; }
-    .push2 {  margin: 0 -120px 0 120px; }
-    .push3 {  margin: 0 -180px 0 180px; }
-    .push4 {  margin: 0 -240px 0 240px; }
-    .push5 {  margin: 0 -300px 0 300px; }
-    .push6 {  margin: 0 -360px 0 360px; }
-    .push7 {  margin: 0 -420px 0 420px; }
-    .push8 {  margin: 0 -480px 0 480px; }
-    .push9 {  margin: 0 -540px 0 540px; }
-    .push10 { margin: 0 -600px 0 600px; }
-    .push11 { margin: 0 -660px 0 660px; }
-    .push12 { margin: 0 -720px 0 720px; }
-    .push13 { margin: 0 -780px 0 780px; }
-    .push14 { margin: 0 -840px 0 840px; }
-    .push15 { margin: 0 -900px 0 900px; }
-    .push16 { margin: 0 -960px 0 960px; }
 }
 
 /*
