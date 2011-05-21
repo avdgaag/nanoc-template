@@ -30,6 +30,7 @@ compile %r{/assets/(lib|styles)/} do
   filter :erb
   filter :concat
   filter :cache_buster
+  filter :coffeescript if item[:extension] == 'coffee'
   filter :minify
 end
 
