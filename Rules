@@ -31,6 +31,7 @@ compile %r{/assets/(lib|styles)/} do
   filter :concat
   filter :cache_buster
   filter :coffeescript if item[:extension] == 'coffee'
+  filter :sass, :syntax => :scss if item[:extension] == 'scss'
   filter :minify
 end
 
@@ -80,6 +81,7 @@ end
 route %r{^/(assets/.*|sitemap|robots|atom)/$} do
   ext = item[:extension]
   ext = 'js' if ext == 'coffee'
+  ext = 'css' if ext == 'scss'
 
   fp = cachebust?(item) ? fingerprint(item[:filename]) : ''
   item.identifier.chop + fp + '.' + ext
