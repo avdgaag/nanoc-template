@@ -19,16 +19,13 @@
 #
 # ...is replaced with the contents of jquery.js.
 #
-# Currently, this filters assumes you only use this feature for loading vendor
-# code -- that is, that you do not write your own styles in multiple stylesheets.
-# Any file that is referenced is looked up in the special top-level directory
-# 'vendor'. So, the above  examples will actually try to load the files
-# 'PROJECT_ROOT/vendor/reset.css' and 'PROJECT_ROOT/vendor/jquery.js'.
+# Files are looked up relative to the current file, or in the
+# top-level vendor directory.
 class ConcatFilter < Nanoc3::Filter
   identifier :concat
 
   def run(content, args = {})
-    content.gsub(%r{^\s*(?:// require |@import url)\(?([a-zA-Z0-9_\-\.]+)(?:\);)?$}) do |m|
+    content.gsub(%r{^\s*(?:(?://|#) require |@import url)\(?([a-zA-Z0-9_\-\.]+)(?:\);)?$}) do |m|
       load_file($1) || m
     end
   end
@@ -36,8 +33,14 @@ class ConcatFilter < Nanoc3::Filter
 private
 
   def load_file(filename)
-    path = File.join(File.dirname(__FILE__), '..', 'vendor', filename)
+    path = File.join(File.dirname(item[:content_filename]), filename)
+
+    unless File.exists? path
+      path = File.join(File.dirname(__FILE__), '..', 'vendor', filename)
+    end
+
     return unless File.exists? path
+
     File.read(path)
   end
 end
