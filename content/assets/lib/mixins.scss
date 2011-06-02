@@ -36,3 +36,29 @@
         clear: left;
     }
 }
+@mixin opacity($value) {
+    // IE 8
+    -ms-filter:     'progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})';
+    // IE 5-7
+    filter:         alpha(opacity=#{$value * 100});
+    // Netscape
+    -moz-opacity:   $value;
+    // Safari 1
+    -khtml-opacity: $value;
+    // Standard
+    opacity:        $value;
+}
+@mixin border-radius($value, $corner: 'all') {
+    @if($corner == 'all') {
+        -webkit-border-radius: $value;
+           -moz-border-radius: $value;
+             -o-border-radius: $value;
+                border-radius: $value;
+    } @else {
+        -webkit-border-#{$corner}-radius:  $value;
+           -moz-border-radius-#{$corner}: $value;
+             -o-border-#{$corner}-radius: $value;
+             border-#{$corner}-radius:    $value;
+    }
+}
+
