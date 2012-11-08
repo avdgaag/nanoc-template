@@ -1,14 +1,14 @@
 require "bundler/setup"
-require 'nanoc3/cachebuster'
-include Nanoc3::Helpers::CacheBusting
-include Nanoc3::Helpers::XMLSitemap
-# include Nanoc3::Helpers::Rendering
-# include Nanoc3::Helpers::Blogging
-# include Nanoc3::Helpers::LinkTo
-# include Nanoc3::Helpers::Filtering
-# include Nanoc3::Helpers::Tagging
-# include Nanoc3::Helpers::Capturing
-# include Nanoc3::Helpers::Text
+require 'nanoc/cachebuster'
+include Nanoc::Helpers::CacheBusting
+include Nanoc::Helpers::XMLSitemap
+include Nanoc::Helpers::Rendering
+include Nanoc::Helpers::Blogging
+include Nanoc::Helpers::LinkTo
+include Nanoc::Helpers::Filtering
+include Nanoc::Helpers::Tagging
+include Nanoc::Helpers::Capturing
+include Nanoc::Helpers::Text
 
 # Output a meta-tag for use in your site header. The key you supply is looked
 # up in the configuration under 'meta_data'. You can override it on a per-item
