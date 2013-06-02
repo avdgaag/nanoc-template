@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'nanoc',                '~>3.4'
 gem 'kramdown',             '~>0.14'
