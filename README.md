@@ -34,7 +34,7 @@ Occasionally, I extract code and conventions from real-world projects and pull i
 
 ## Credits
 
-* **Author**: Arjan van der Gaag  <aran@arjanvandergaag.nl>
+* **Author**: Arjan van der Gaag  <arjan@arjanvandergaag.nl>
 * **URL**: http://arjanvandergaag.nl
 
 A lot of the HTML, CSS and htaccess rules is based on [Paul Irish's HTML5-boilerplate][1].
