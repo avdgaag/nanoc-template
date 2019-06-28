@@ -1,0 +1,14 @@
+{
+  "short_name": "<%= @config[:site][:short_name] %>",
+  "name": "<%= @config[:site][:name] %>",
+  "icons": [
+    {
+      "src": "<%= @items['/icons/icon-192.png'].path %>",
+      "type": "image/png",
+      "sizes": "<%= @items['/icons/icon-192.png'][:rect][:width] %>x<%= @items['/icons/icon-192.png'][:rect][:height] %>"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa"
+}

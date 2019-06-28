@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="<%= @item[:description] %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= @item[:title] %></title>
+    <%= link_tag '/site.webmanifest', rel: 'manifest' %>
+    <%= link_tag '/icons/icon-120.png', rel: 'apple-touch-icon', sizes: '120x120' %>
+    <%= link_tag '/icons/icon-152.png', rel: 'apple-touch-icon', sizes: '152x152' %>
+    <%= link_tag '/icons/icon-180.png', rel: 'apple-touch-icon', sizes: '180x180' %>
+    <%= link_tag '/icons/icon-76.png', rel: 'apple-touch-icon', sizes: '76x76' %>
+    <%= link_tag '/icons/icon-192.png', rel: 'apple-touch-icon', sizes: '120x120' %>
+    <%= stylesheet_tag '/stylesheet.css' %>
+  </head>
+  <body>
+    <%= yield %>
+    <%= script_tag '/app.js' %>
+  </body>
+</html>

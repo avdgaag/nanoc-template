@@ -1,0 +1,56 @@
+# A list of file extensions that Nanoc will consider to be textual rather than
+# binary. If an item with an extension not in this list is found,  the file
+# will be considered as binary.
+text_extensions:
+  - webmanifest
+  - adoc
+  - asciidoc
+  - atom
+  - coffee
+  - css
+  - erb
+  - haml
+  - handlebars
+  - hb
+  - htm
+  - html
+  - js
+  - less
+  - markdown
+  - md
+  - ms
+  - mustache
+  - php
+  - rb
+  - rdoc
+  - sass
+  - scss
+  - slim
+  - tex
+  - txt
+  - xhtml
+  - xml
+
+prune:
+  auto_prune: true
+
+data_sources:
+  - type: sketch
+    items_root: /icons/
+    filename: icons.sketch
+    page: Icons
+  - type: filesystem
+    encoding: utf-8
+    extra_files:
+      - "**/.htaccess"
+
+checking:
+  enabled_checks:
+    - internal_links
+    - stale
+
+base_url: http://example.com
+
+site:
+  name: My site
+  short_name: site

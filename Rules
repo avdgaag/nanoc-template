@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+
+preprocess do
+  @items.create("<%= xml_sitemap(items: content_items) %>", {}, '/sitemap.xml')
+end
+
+postprocess do
+  if ENV['NANOC_ENV'] == 'prod'
+    system 'node_modules/.bin/purgecss --css output/stylesheet.css --content output/**/*.html --out output'
+    system 'gzip -9 --force --keep output/stylesheet.css'
+  end
+end
+
+compile '/stylesheet.css' do
+  filter :external, exec: 'node_modules/.bin/postcss'
+  filter :rainpress if ENV['NANOC_ENV'] == 'prod'
+  snapshot :plain
+  filter :external, exec: 'gzip -9 --to-stdout' if ENV['NANOC_ENV'] == 'prod'
+end
+
+route '/stylesheet.css', snapshot: :plain do
+  item.identifier.to_s
+end
+
+route '/stylesheet.css' do
+  item.identifier + '.gz'  if ENV['NANOC_ENV'] == 'prod'
+end
+
+compile '/app.js' do
+  filter :uglify_js if ENV['NANOC_ENV'] == 'prod'
+end
+
+compile '/app.js', rep: :gzip do
+  filter :uglify_js if ENV['NANOC_ENV'] == 'prod'
+  filter :external, exec: 'gzip -9 --to-stdout'
+end
+
+route '/app.js' do
+  item.identifier.to_s
+end
+
+route '/app.js', rep: :gzip do
+  item.identifier + '.gz'
+end
+
+compile '/icons/icon-192.png', rep: :ico do
+  filter :export_sketch, name: item[:name]
+  filter :convert, to: 'ico'
+  write "/favicon.ico"
+end
+
+compile '/icons/*' do
+  filter :export_sketch, name: item[:name]
+  filter :pngcrush if ENV['NANOC_ENV'] == 'prod'
+  write "/#{item[:name]}.png"
+end
+
+compile '/index.html' do
+  layout '/default.*'
+  write '/index.html'
+end
+
+compile '/404.html' do
+  layout '/default.*'
+  write '/404.html'
+end
+
+compile '/**/*.html' do
+  layout '/default.*'
+  write item.identifier.without_ext + '/index.html'
+end
+
+passthrough '/.htaccess'
+
+compile '/*.(txt|webmanifest)' do
+  write item.identifier.to_s
+end
+
+compile '/site.webmanifest' do
+  filter :erb
+  write item.identifier.to_s
+end
+
+compile '/browserconfig.xml' do
+  filter :erb
+  filter :relativize_paths, type: :xml
+  write item.identifier.to_s
+end
+
+compile '/sitemap.xml' do
+  filter :erb
+  write item.identifier.to_s
+end
+
+compile '/**/*' do
+  write item.identifier.to_s
+end
+
+layout '/**/*', :erb

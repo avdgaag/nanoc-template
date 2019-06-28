@@ -1,0 +1,6 @@
+/tmp
+/crash.log
+/node_modules
+/bin
+/output
+/output.diff

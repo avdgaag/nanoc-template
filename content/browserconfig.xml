@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Please read: https://msdn.microsoft.com/en-us/library/ie/dn455106.aspx -->
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="<%= @items['/icons/tile-small.png'].path %>"/>
+      <square150x150logo src="<%= @items['/icons/tile-medium.png'].path %>"/>
+      <wide310x150logo src="<%= @items['/icons/tile-wide.png'].path %>"/>
+      <square310x310logo src="<%= @items['/icons/tile-large.png'].path %>"/>
+    </tile>
+  </msapplication>
+</browserconfig>
