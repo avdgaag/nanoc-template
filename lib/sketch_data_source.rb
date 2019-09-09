@@ -12,7 +12,7 @@ class SketchDataSource < Nanoc::DataSource
 
   def up
     @checksum = Digest::SHA2.file(@config[:filename]).hexdigest
-    @artboards = `sketchtool list artboards #{@config[:filename]}`
+    @artboards = `bin/sketchtool list artboards #{@config[:filename]}`
   end
 
   def items

@@ -7,7 +7,7 @@ class ExportSketchFilter < Nanoc::Filter
   def run(filename, params = {})
     name = params.fetch(:name)
     Dir.mktmpdir do |dir|
-      system "sketchtool export artboards '#{filename}' --item=#{name} --output='#{dir}' --save-for-web"
+      system "bin/sketchtool export artboards '#{filename}' --item=#{name} --output='#{dir}' --save-for-web"
       FileUtils.mv File.join(dir, "#{name}.png"), output_filename
     end
   end
