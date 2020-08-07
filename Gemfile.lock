@@ -49,7 +49,8 @@ GEM
     http_parser.rb (0.6.0)
     json (2.2.0)
     json_schema (0.20.7)
-    kramdown (2.1.0)
+    kramdown (2.3.0)
+      rexml
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -101,6 +102,7 @@ GEM
       ffi (~> 1.0)
     rb-readline (0.5.5)
     ref (2.0.0)
+    rexml (3.2.4)
     rouge (3.10.0)
     ruby_dep (1.5.0)
     rubypants (0.7.0)
